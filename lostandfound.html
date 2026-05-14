@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lost &amp; Found — OCC Transport</title>
+<link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:        #0C2340;
+  --navy-mid:    #163659;
+  --blue:        #1a6fba;
+  --blue-bright: #2684d4;
+  --blue-pale:   #e8f2fb;
+  --blue-muted:  #b8d4ef;
+  --gold:        #e8a000;
+  --gold-light:  #fdf3dc;
+  --white:       #ffffff;
+  --off-white:   #f5f7fa;
+  --gray-100:    #eaecf0;
+  --gray-200:    #d1d5db;
+  --gray-400:    #8a97ab;
+  --gray-600:    #4b5563;
+  --gray-800:    #1f2937;
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 4px rgba(12,35,64,0.07), 0 3px 14px rgba(12,35,64,0.06);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--off-white); color: var(--gray-800); font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #c8cdd4; }
+::-webkit-scrollbar-thumb { background: #5a6a7e; border-radius: 5px; border: 2px solid #c8cdd4; }
+::-webkit-scrollbar-thumb:hover { background: #3d4f63; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 28px; height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-logo img { height: 42px; display: block; }
+.nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.72); font-size: 16px; padding: 8px 15px; border-radius: 6px; white-space: nowrap; transition: color .12s, background .12s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); }
+.nav-cta { background: var(--blue-bright) !important; color: #fff !important; padding: 9px 20px !important; font-weight: 500 !important; }
+.nav-cta:hover { background: #3090df !important; }
+
+/* HAMBURGER / MOBILE NAV */
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; align-items: center; gap: 5px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 2px; transition: transform .2s, opacity .2s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile { display: none; position: fixed; top: 76px; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 99; overflow-y: auto; padding: 12px 0; }
+.nav-mobile.open { display: block; }
+.nav-mobile a { display: block; color: rgba(255,255,255,0.72); font-size: 17px; padding: 15px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color .12s, background .12s; }
+.nav-mobile a:hover, .nav-mobile a.active { color: #fff; background: rgba(255,255,255,0.07); }
+.nav-mobile .mob-cta { background: var(--blue-bright) !important; color: #fff !important; margin: 14px 28px 0; border-radius: 8px; border: none !important; text-align: center; }
+
+/* ALERT */
+.alert-bar { background: #fff3cd; border-bottom: 2px solid #e8a000; padding: 14px 28px; }
+.alert-bar-inner { max-width: 1160px; margin: 0 auto; display: flex; gap: 14px; align-items: flex-start; }
+.alert-bar-inner svg { width: 22px; height: 22px; min-width: 22px; margin-top: 2px; color: #92620a; }
+.alert-bar-inner p { font-size: 16px; font-weight: 500; color: #5c3a00; line-height: 1.6; }
+.alert-bar-inner a { color: #92620a; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+
+/* PAGE HEADER */
+.page-header { background: var(--navy); padding: 40px 28px 36px; }
+.page-header-inner { max-width: 1160px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: rgba(255,255,255,0.38); margin-bottom: 12px; }
+.breadcrumb a { color: rgba(255,255,255,0.5); transition: color .12s; }
+.breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.breadcrumb span { margin: 0 7px; }
+.page-header h1 { font-size: 36px; font-weight: 700; color: #fff; letter-spacing: -0.02em; line-height: 1.1; }
+.page-header p { font-size: 16px; color: rgba(255,255,255,0.52); margin-top: 10px; }
+
+/* LAYOUT */
+.main { max-width: 1160px; margin: 0 auto; padding: 56px 28px 96px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
+.main-col { display: flex; flex-direction: column; gap: 28px; }
+
+/* CARD */
+.card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.card-head { padding: 26px 28px 0; display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.card-head-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-icon svg { width: 22px; height: 22px; color: var(--blue); }
+.card-head-icon.gold { background: var(--gold-light); }
+.card-head-icon.gold svg { color: var(--gold); }
+.card-head h2 { font-size: 20px; font-weight: 600; color: var(--navy); letter-spacing: -0.01em; }
+.card-body { padding: 0 28px 28px; }
+
+/* INFO ROWS */
+.info-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
+.info-row:first-child { padding-top: 0; }
+.info-row:last-child { border-bottom: none; padding-bottom: 0; }
+.info-icon { width: 40px; height: 40px; border-radius: 9px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.info-icon svg { width: 20px; height: 20px; color: var(--blue); }
+.info-icon.gold { background: var(--gold-light); }
+.info-icon.gold svg { color: #c07000; }
+.info-icon.green { background: #eafaf1; }
+.info-icon.green svg { color: #1a7a45; }
+.info-text { font-size: 15px; color: var(--gray-600); line-height: 1.65; }
+.info-text strong { display: block; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.info-text a { color: var(--blue); font-weight: 500; }
+.info-text a:hover { color: var(--navy); }
+
+/* CALLOUT */
+.callout { background: var(--gold-light); border: 1px solid var(--gold); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 14px; color: #5c3a00; margin-top: 14px; line-height: 1.6; }
+.callout strong { font-weight: 600; }
+.callout-blue { background: var(--blue-pale); border: 1px solid var(--blue-muted); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 14px; color: #1a3a5c; margin-top: 14px; line-height: 1.6; }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+.sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.sb-card-head { background: var(--navy); padding: 17px 22px; display: flex; align-items: center; gap: 11px; }
+.sb-card-head svg { width: 18px; height: 18px; color: rgba(255,255,255,0.5); flex-shrink: 0; }
+.sb-card-head h3 { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.9); }
+.sb-card-body { padding: 20px 22px; }
+.sb-card-body p { font-size: 15px; color: var(--gray-600); line-height: 1.7; margin-bottom: 14px; }
+.sb-card-body p:last-of-type { margin-bottom: 0; }
+.btn-sb { display: inline-flex; align-items: center; justify-content: center; width: 100%; font-family: var(--font); font-size: 15px; font-weight: 500; padding: 12px; border-radius: var(--radius-sm); background: var(--blue-pale); color: var(--blue); border: 1px solid var(--blue-muted); cursor: pointer; transition: background .12s; text-decoration: none; margin-bottom: 10px; }
+.btn-sb:last-child { margin-bottom: 0; }
+.btn-sb:hover { background: var(--blue-muted); }
+
+/* UPDF INFO LIST */
+.detail-list { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 6px; }
+.detail-list li { font-size: 14px; color: var(--gray-600); display: flex; align-items: flex-start; gap: 8px; line-height: 1.55; }
+.detail-list li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); margin-top: 8px; flex-shrink: 0; }
+
+/* FOOTER */
+footer { background: var(--navy); padding: 44px 28px 32px; color: rgba(255,255,255,0.45); }
+.footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr auto; gap: 40px; align-items: start; margin-bottom: 28px; }
+.footer-logo img { height: 32px; opacity: 0.8; margin-bottom: 10px; display: block; }
+.footer-logo p   { font-size: 14px; line-height: 1.6; }
+.footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 32px; }
+.footer-links a { font-size: 14px; color: rgba(255,255,255,0.45); transition: color .12s; }
+.footer-links a:hover { color: rgba(255,255,255,0.82); }
+.footer-social { display: flex; gap: 9px; }
+.footer-soc-link { width: 38px; height: 38px; border-radius: 8px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; transition: background .12s; }
+.footer-soc-link:hover { background: rgba(255,255,255,0.13); }
+.footer-soc-link img { width: 18px; height: 18px; filter: brightness(0) invert(0.6); }
+.footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.28); flex-wrap: wrap; gap: 6px; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .main { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 620px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .page-header h1 { font-size: 28px; }
+  .page-header { padding: 28px 20px 24px; }
+  .main { padding: 28px 18px 64px; }
+}
+</style>
+</head>
+<body>
+
+<!nav>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+    </a>
+    <ul class="nav-links">
+      <li><a href="routeschedule.html">Routes &amp; Schedules</a></li>
+      <li><a href="employment.html">Employment</a></li>
+      <li><a href="passtips.html">Passenger Tips</a></li>
+      <li><a href="services.html">Additional Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contactus.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="routeschedule.html">Routes &amp; Schedules</a>
+  <a href="employment.html">Employment</a>
+  <a href="passtips.html">Passenger Tips</a>
+  <a href="services.html">Additional Services</a>
+  <a href="about.html">About</a>
+  <a href="news.html">News</a>
+  <a href="contactus.html" class="mob-cta">Contact Us</a>
+</div>
+
+<!-- ============================================================
+     NOTICE BAR — update this on EVERY PAGE that uses it.
+     To change the message: edit the text inside the <p> tag below.
+     To hide it entirely: add style="display:none" to the div.
+     Use VS Code Find in Files (Shift+Cmd+F) to update all pages at once.
+     ============================================================ -->
+
+
+<div class="alert-bar">
+  <div class="alert-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <p>
+      <strong>Service alert:</strong> 
+Due to the ongoing city construction by the Main & Front St intersection, there are currently detours and skipped stops along the WS and MS Inbound routes. See <a href="news.html">News &amp; Info</a> for more information.
+  </div>
+</div>
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>&rsaquo;</span> Lost &amp; Found</div>
+    <h1>Lost &amp; Found</h1>
+    <p>Left something on the bus? Here&rsquo;s how to get it back.</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="main-col">
+
+    <!-- Same Day -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h2>Same Day</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <div class="info-icon green">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Ask the driver</strong>
+            If you realize your item is missing while service is still running, you may ask a driver if they have seen your lost item. You may also ask to search their bus.
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon gold">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Do not ask drivers to radio</strong>
+            Please do not ask drivers to radio around for your lost item. This is against company policy and interferes with safe bus operation.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Days After -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/></svg>
+        </div>
+        <h2>Business Day(s) After</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <div class="info-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Items are collected after service ends</strong>
+            After our buses finish service for the day, all found items are collected and delivered to the University Police Department&rsquo;s Lost &amp; Found.
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>University Police Department (UPD) Lost &amp; Found</strong>
+            Basement of the Couper Administration Building<br>
+            <a href="tel:+16077772393">(607) 777-2393</a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Where your item ends up depends on its type</strong>
+            <ul class="detail-list">
+              <li><strong>Valuables</strong> (wallets, electronics, keys, etc.) are turned over to UPD Lost &amp; Found.</li>
+              <li><strong>Personal items</strong> (scarves, hats, water bottles, etc.) are brought to the OCCT office at UUW B20.</li>
+            </ul>
+            <div class="callout-blue" style="margin-top:12px;">
+              If you&rsquo;re unsure where your item was taken, call UPD at <a href="tel:+16077772393" style="color:var(--blue);font-weight:500;">(607) 777-2393</a> or stop by the OCCT office (UUW B20) during business hours.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-col -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+        <h3>UPD Lost &amp; Found</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>Basement of the Couper Administration Building on campus.</p>
+        <p><a href="tel:+16077772393" style="color:var(--blue);font-weight:500;">(607) 777-2393</a></p>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+        <h3>OCCT Office</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>Personal items (hats, scarves, water bottles) are held at our office.</p>
+        <p>University Union West, Room B20 (UUW B20)<br>Down the Stairs next to Shake Smart.</p>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        <h3>Still need help?</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>If you can&rsquo;t locate your item, contact our office directly.</p>
+        <a href="contactus.html" class="btn-sb">Contact Us</a>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+      <p>Serving the Binghamton University community since 1971.</p>
+    </div>
+    <div class="footer-links">
+      <a href="routeschedule.html">Routes &amp; Schedules</a>
+      <a href="employment.html">Employment</a>
+      <a href="passtips.html">Passenger Tips</a>
+      <a href="services.html">Additional Services</a>
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/occtransport/" class="footer-soc-link" target="_blank"><img src="https://occtransport.s3.amazonaws.com/Logos/Facebook+Logo.png" alt="Facebook"></a>
+      <a href="https://twitter.com/OCCT" class="footer-soc-link" target="_blank"><img src="https://occtransport.s3.amazonaws.com/Logos/X+Logo.png" alt="X"></a>
+      <a href="https://www.instagram.com/buocct/" class="footer-soc-link" target="_blank"><img src="https://occtransport.s3.amazonaws.com/Logos/Instagram+Logo.png" alt="Instagram"></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; OCC Transport Inc.</span>
+    <span>Free to ride with your Binghamton University ID</span>
+  </div>
+</footer>
+
+<script>
+function toggleMobileNav() {
+  const ham = document.getElementById('navHamburger');
+  const mob = document.getElementById('navMobile');
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+</body>
+</html>

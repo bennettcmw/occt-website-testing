@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next Departure &mdash; University Union &mdash; OCC Transport</title>
+<link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #090f1a;
+  --surf:   #0f1923;
+  --surf2:  #141f2e;
+  --border: rgba(255,255,255,0.07);
+  --text:   #edf2f7;
+  --muted:  #7a8fa6;
+  --dim:    rgba(255,255,255,0.28);
+  --soon:   #34d058;
+  --gold:   #f0a500;
+  --blue:   #2684d4;
+  --font:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TIME BAR ── */
+.time-bar {
+  flex-shrink: 0;
+  background: #0C2340;
+  border-bottom: 2px solid rgba(255,255,255,0.09);
+  padding: 1.1vh 2.2vw;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+.time-bar-logo img { height: 5.5vh; display: block; }
+.time-bar-center { text-align: center; grid-column: 2; }
+.time-bar-location {
+  font-size: 1vh;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 0.2vh;
+}
+.time-bar-clock {
+  font-size: 7vh;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.time-bar-date { font-size: 1.4vh; color: var(--dim); margin-top: 0.3vh; }
+.time-bar-right { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
+.day-toggle {
+  display: inline-flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255,255,255,0.14);
+}
+.day-btn {
+  font-family: var(--font);
+  font-size: 1.2vh;
+  font-weight: 600;
+  padding: 0.8vh 1.2vw;
+  border: none;
+  background: transparent;
+  color: var(--dim);
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.day-btn.active { background: var(--blue); color: #fff; }
+.day-btn:hover:not(.active) { background: rgba(255,255,255,0.07); color: #fff; }
+.auto-label { font-size: 0.85vh; color: rgba(255,255,255,0.18); margin-top: 0.4vh; letter-spacing: .06em; }
+.legend-hint { display: inline-flex; align-items: center; gap: 0.45vw; font-size: 1.1vh; color: rgba(255,255,255,0.28); margin-top: 0.6vh; letter-spacing: .04em; }
+.legend-swatch { width: 1.6vh; height: 1.6vh; border-radius: 3px; border: 1.5px solid var(--soon); flex-shrink: 0; }
+
+/* ── MODIFIED SCHEDULE ALERT ── */
+.mod-bar {
+  flex-shrink: 0;
+  background: rgba(110,50,0,0.85);
+  border-bottom: 1px solid var(--gold);
+  padding: 0.7vh 2.2vw;
+  display: none;
+}
+.mod-bar.on { display: block; }
+.mod-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.8vw;
+  font-size: 1.3vh;
+  color: #ffe0a0;
+}
+.mod-bar-inner svg { flex-shrink: 0; width: 1.7vh; height: 1.7vh; }
+
+/* ── PANELS ── */
+.panels {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.15fr 1px 1fr;
+}
+
+.panel-divider { background: var(--border); }
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Panel section label */
+.panel-label {
+  flex-shrink: 0;
+  background: var(--surf2);
+  border-bottom: 1px solid var(--border);
+  padding: 0.7vh 2.2vw;
+  font-size: 0.85vh;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--muted);
+}
+
+/* Column headers inside panel */
+.panel-head {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 0.7fr 2.5fr 1.2fr 1fr;
+  gap: 0.8vw;
+  padding: 0.55vh 2.2vw;
+  background: var(--surf);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.ph-cell {
+  font-size: 0.8vh;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--muted);
+}
+.ph-cell.c { text-align: center; }
+
+/* Panel body — rows flex to fill */
+.panel-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ── DEPARTURE ROW ── */
+.dep-row {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 0.7fr 2.5fr 1.2fr 1fr;
+  gap: 0.8vw;
+  padding: 0 2.2vw;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  min-height: 0;
+  transition: background .15s;
+}
+.dep-row:last-child { border-bottom: none; }
+.dep-row.hidden { display: none; }
+
+/* Route badge */
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6vh;
+  font-weight: 800;
+  border-radius: 8px;
+  padding: 1.1vh 0;
+  letter-spacing: .04em;
+  color: #fff;
+  width: 100%;
+}
+.badge.dark { color: #000; }
+
+/* Destination */
+.td-dest { min-width: 0; overflow: hidden; }
+.route-name {
+  font-size: 1.7vh;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.route-stops {
+  font-size: 1.2vh;
+  color: var(--muted);
+  margin-top: 0.25vh;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mohawk-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35vw;
+  margin-top: 0.5vh;
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.35);
+  color: #fbbf24;
+  font-size: 1.15vh;
+  font-weight: 700;
+  padding: 0.28vh 0.55vw;
+  border-radius: 20px;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.mohawk-tag svg { flex-shrink: 0; width: 1.2vh; height: 1.2vh; }
+
+/* Departure times */
+.td-time { text-align: center; }
+.dep-time {
+  font-size: 4.8vh;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.dep-time.no-svc {
+  font-size: 1.35vh;
+  font-weight: 500;
+  color: var(--muted);
+  font-style: italic;
+}
+.dep-time.soon { color: var(--soon); }
+.dep-row.approaching { box-shadow: inset 0 0 0 2px var(--soon); }
+
+.td-after { text-align: center; }
+.after-time {
+  font-size: 2.8vh;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.after-time.no-more {
+  font-size: 1.15vh;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── SERVICE ALERTS BAR ── */
+.alerts-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  padding: 0.9vh 2.2vw;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+}
+.alerts-label {
+  font-size: 1vh;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.alerts-label::after { content: ':'; margin-right: 0.4vw; }
+.alert-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4vw;
+  font-size: 1.15vh;
+  font-weight: 600;
+  padding: 0.3vh 0.8vw;
+  border-radius: 20px;
+}
+.alert-item.green {
+  background: rgba(52,208,88,0.12);
+  border: 1px solid rgba(52,208,88,0.35);
+  color: #4ade80;
+}
+.alert-item.yellow {
+  background: rgba(240,165,0,0.12);
+  border: 1px solid rgba(240,165,0,0.35);
+  color: #fbbf24;
+}
+.alert-item.red {
+  background: rgba(220,38,38,0.15);
+  border: 1px solid rgba(220,38,38,0.4);
+  color: #f87171;
+}
+.alert-item svg { flex-shrink: 0; width: 1.3vh; height: 1.3vh; }
+
+/* ── LATE NITE TAG ── */
+.ln-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35vw;
+  margin-top: 0.5vh;
+  background: rgba(180,100,255,0.12);
+  border: 1px solid rgba(180,100,255,0.3);
+  color: #c084fc;
+  font-size: 1.15vh;
+  font-weight: 700;
+  padding: 0.28vh 0.55vw;
+  border-radius: 20px;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.ln-tag svg { flex-shrink: 0; width: 1.2vh; height: 1.2vh; }
+
+/* ── LATE NITE BAR ── */
+.ln-bar {
+  flex-shrink: 0;
+  background: rgba(40,10,70,0.92);
+  border-bottom: 1px solid rgba(180,100,255,0.25);
+  padding: 0.7vh 2.2vw;
+  display: none;
+}
+.ln-bar.on { display: block; }
+.ln-bar .mod-bar-inner { color: #c084fc; }
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  flex-shrink: 0;
+  padding: 0.55vh 2.2vw;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+}
+.disclaimer p { font-size: 0.9vh; color: rgba(255,255,255,0.18); line-height: 1.5; }
+.disclaimer a { color: rgba(255,255,255,0.25); }
+</style>
+</head>
+<body>
+
+<!-- TIME BAR -->
+<div class="time-bar">
+  <div class="time-bar-logo">
+    <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+  </div>
+  <div class="time-bar-center">
+    <div class="time-bar-location">University Union &mdash; Outbound Departures</div>
+    <div class="time-bar-clock" id="clock">--:-- --</div>
+    <div class="time-bar-date" id="dateDisplay">Loading&hellip;</div>
+  </div>
+  <div class="time-bar-right">
+    <div class="day-toggle">
+      <button class="day-btn active" id="btnWkd" onclick="setMode('weekday', true)">Weekday</button>
+      <button class="day-btn" id="btnWkn" onclick="setMode('weekend', true)">Weekend</button>
+    </div>
+    <div class="auto-label" id="autoLabel">Auto-detected</div>
+    <div class="legend-hint"><span class="legend-swatch"></span> Scheduled within 5 min</div>
+  </div>
+</div>
+
+<!-- MODIFIED SCHEDULE NOTICE -->
+<div class="mod-bar" id="modBar">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <span id="modNotice"></span>
+  </div>
+</div>
+
+<!-- LATE NITE BANNER -->
+<div class="ln-bar" id="lnBar">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6a9.72 9.72 0 01.748-3.752A9.753 9.753 0 003 12c0 5.385 4.365 9.75 9.75 9.75 4.596 0 8.477-3.182 9.502-7.498a.75.75 0 000-.25z"/>
+    </svg>
+    <span>Late Nite Service in effect &mdash; WS &amp; DCL routes may be suspended due to biohazard incidents or other operational issues. Allow extra wait time.</span>
+  </div>
+</div>
+
+<!-- DEPARTURE BOARD: two-panel layout -->
+<div class="panels">
+
+  <!-- LEFT PANEL: Routes to UDC -->
+  <div class="panel">
+    <div class="panel-label">Routes to University Downtown Center (UDC)</div>
+    <div class="panel-head">
+      <div class="ph-cell">Route</div>
+      <div class="ph-cell">Destination</div>
+      <div class="ph-cell c">Next</div>
+      <div class="ph-cell c">Following</div>
+    </div>
+    <div class="panel-body">
+
+      <div class="dep-row" id="card-WS">
+        <div><span class="badge" style="background:#191970;">WS</span></div>
+        <div class="td-dest">
+          <div class="route-name">Westside Outbound</div>
+          <div class="route-stops">Floral Ave &amp; Main St &rarr; UDC</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-WS">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-WS">--</div></div>
+      </div>
+
+      <div class="dep-row hidden" id="card-LNWS">
+        <div><span class="badge" style="background:#191970; font-size:1.8vh;">LN WS</span></div>
+        <div class="td-dest">
+          <div class="route-name">Late Nite Westside</div>
+          <div class="route-stops">Floral Ave &amp; Main St &rarr; State &amp; Hawley Sts</div>
+          <div class="ln-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
+            May not run due to Late Nite incidents
+          </div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-LNWS">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-LNWS">--</div></div>
+      </div>
+
+      <div class="dep-row" id="card-DCL">
+        <div><span class="badge" style="background:#D2042D;">DCL</span></div>
+        <div class="td-dest">
+          <div class="route-name">Downtown Center&mdash;Leroy</div>
+          <div class="route-stops">Riverside Dr &amp; Leroy St &rarr; UDC</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-DCL">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-DCL">--</div></div>
+      </div>
+
+      <div class="dep-row hidden" id="card-LNDCL">
+        <div><span class="badge" style="background:#D2042D; font-size:1.8vh;">LN DCL</span></div>
+        <div class="td-dest">
+          <div class="route-name">Late Nite Downtown&mdash;Leroy</div>
+          <div class="route-stops">Riverside Dr &amp; Leroy St &rarr; State &amp; Hawley Sts</div>
+          <div class="ln-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
+            May not run due to Late Nite incidents
+          </div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-LNDCL">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-LNDCL">--</div></div>
+      </div>
+
+      <div class="dep-row" id="card-MS">
+        <div><span class="badge" style="background:#6495ED;">MS</span></div>
+        <div class="td-dest">
+          <div class="route-name">Main Street Outbound</div>
+          <div class="route-stops">Pharmacy &amp; Nursing Schools &rarr; UDC</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-MS">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-MS">--</div></div>
+      </div>
+
+      <div class="dep-row" id="card-DS">
+        <div><span class="badge" style="background:#708090;">DS</span></div>
+        <div class="td-dest">
+          <div class="route-name">Downtown Southside</div>
+          <div class="route-stops">BC Junction; Conklin &amp; Tompkins &rarr; UDC</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-DS">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-DS">--</div></div>
+      </div>
+
+      <div class="dep-row" id="card-UDC">
+        <div><span class="badge" style="background:#FF7F50;">UDC</span></div>
+        <div class="td-dest">
+          <div class="route-name">UDC Express</div>
+          <div class="route-stops">Vestal Pkwy &rarr; University Downtown Center</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-UDC">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-UDC">--</div></div>
+      </div>
+
+      <div class="dep-row hidden" id="card-DE">
+        <div><span class="badge" style="background:#000000;">DE</span></div>
+        <div class="td-dest">
+          <div class="route-name">Downtown Express</div>
+          <div class="route-stops">UClub / Univ. Plaza &rarr; State &amp; Hawley St</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-DE">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-DE">--</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel-divider"></div>
+
+  <!-- RIGHT PANEL: Other destinations -->
+  <div class="panel">
+    <div class="panel-label">Other Destinations</div>
+    <div class="panel-head">
+      <div class="ph-cell">Route</div>
+      <div class="ph-cell">Destination</div>
+      <div class="ph-cell c">Next</div>
+      <div class="ph-cell c">Following</div>
+    </div>
+    <div class="panel-body">
+
+      <!-- IU (ITC-UClub) — hidden when no more service today -->
+      <div class="dep-row" id="card-IU">
+        <div><span class="badge dark" style="background:#CF9FFF;">IU</span></div>
+        <div class="td-dest">
+          <div class="route-name">ITC&mdash;UClub Shuttle</div>
+          <div class="route-stops">ITC; UClub; Meadows; Hayes</div>
+          <div class="mohawk-tag">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Cross the street &mdash; Mohawk Stop
+          </div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-IU">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-IU">--</div></div>
+      </div>
+
+      <!-- UC (UCLUB) — hidden when ITC-UClub is next -->
+      <div class="dep-row" id="card-UC">
+        <div><span class="badge" style="background:#BF40BF;">UC</span></div>
+        <div class="td-dest">
+          <div class="route-name">UClub Shuttle</div>
+          <div class="route-stops">UClub; Meadows; Hayes</div>
+          <div class="mohawk-tag">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Cross the street &mdash; Mohawk Stop
+          </div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-UC">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-UC">--</div></div>
+      </div>
+
+      <div class="dep-row" id="card-VS">
+        <div><span class="badge" style="background:#E37383;">VS</span></div>
+        <div class="td-dest">
+          <div class="route-name">Vestal Shopping</div>
+          <div class="route-stops">Walmart; Target; Shoppes at Vestal</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-VS">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-VS">--</div></div>
+      </div>
+
+      <div class="dep-row" id="card-OC">
+        <div><span class="badge dark" style="background:#FFC000;">OC</span></div>
+        <div class="td-dest">
+          <div class="route-name">Oakdale Commons</div>
+          <div class="route-stops">Aldi; Oakdale Mall; Wegmans</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-OC">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-OC">--</div></div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /panels -->
+
+<!-- SERVICE ALERTS -->
+<div class="alerts-bar" id="alertsBar">
+  <span class="alerts-label">Service Alerts</span>
+  <span class="alert-item green" id="alertItem">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+    </svg>
+    No active alerts
+  </span>
+</div>
+
+<div class="disclaimer">
+  <p>Scheduled times are approximate &mdash; delays may occur due to traffic, weather, or other conditions. For service alerts and schedule changes, visit <a href="news.html">News &amp; Info</a> or contact OCC Transport.</p>
+</div>
+
+<script>
+/* =====================================================================
+ * MODIFIED SCHEDULE CONFIGURATION
+ *
+ * To apply a modified schedule:
+ *   1. Set active: true
+ *   2. Fill in notice with the alert text shown on screen
+ *   3. Add modified times under schedules.ROUTE_KEY
+ *      (only routes with changes; others use the default below)
+ *
+ * Example:  WS: { weekday: ["08:00","10:00","14:00"], weekend: [] }
+ * Leave a route out to keep its default schedule.
+ * ===================================================================== */
+const MODIFIED = {
+  active: false,
+  notice: "Modified schedule in effect. Times below reflect today's adjusted service.",
+  schedules: {
+    // WS: { weekday: [], weekend: [] },
+    // DCL: { weekday: [], weekend: [] },
+    // MS: { weekday: [], weekend: [] },
+    // DS: { weekday: [], weekend: [] },
+    // UDC: { weekday: [], weekend: [] },
+    // UC: { weekday: [], weekend: [] },
+    // IU: { weekday: [], weekend: [] },
+    // VS: { weekday: [], weekend: [] },
+    // OC: { weekday: [], weekend: [] },
+    // DE: { weekday: [], weekend: [] },
+    // LNWS: { weekday: [], weekend: [] },
+    // LNDCL: { weekday: [], weekend: [] },
+  }
+};
+
+/* =====================================================================
+ * DEFAULT SCHEDULES — 24-hour "HH:MM"
+ * Day-restricted: { t: "HH:MM", d: [JS weekday numbers] }
+ *   0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat
+ * UC and IU depart from Mohawk Stop (across the street from Union).
+ * ===================================================================== */
+const SCHEDULES = {
+  WS: {
+    weekday: [
+      "07:15","08:00","08:20","09:25","09:55","10:45","11:15","11:45",
+      "12:10","12:40","13:25","14:10","14:45","15:10","15:45","16:45",
+      "16:55","17:25","17:45","18:20","19:10","19:25","19:45","20:15",
+      "20:35","21:10","21:40",
+      {t:"22:35",d:[5]},
+      {t:"22:50",d:[1,2,3,4]},
+      "23:45"
+    ],
+    weekend: [
+      "09:15","10:00","11:15","12:00","13:25","14:30","15:40","16:30",
+      "18:25","19:15","21:00","21:15",
+      {t:"22:00",d:[0]},
+      "22:35","23:45"
+    ]
+  },
+  DCL: {
+    weekday: [
+      "07:45","08:15","09:05","09:55","10:25","10:45","11:05","11:20",
+      "11:55","12:30","13:20","14:10","15:00","15:35","16:15","16:50",
+      "17:05","17:40","18:00","18:20","18:40","19:10","19:40","20:25",
+      "20:55","21:30","21:55",
+      {t:"22:50",d:[1,2,3,4]},
+      {t:"23:00",d:[5]},
+      "23:45"
+    ],
+    weekend: [
+      "08:45","09:30","10:45","12:45","13:45","14:55","16:25","17:40",
+      "19:10","20:30",
+      {t:"21:45",d:[0]},
+      "21:55"
+    ]
+  },
+  MS: {
+    weekday: [
+      "07:30","08:35","09:30","10:25","11:35","12:25","13:15","14:15",
+      "15:35","16:30","17:40","18:40","19:40","20:40",
+      {t:"21:40",d:[1,2,3,4]}
+    ],
+    weekend: ["10:40","12:40","15:00","17:15","20:00"]
+  },
+  DS: {
+    weekday: [
+      "10:05","11:35","12:35","13:35","14:40","15:55","17:25",
+      "18:35","19:30","20:35","21:20"
+    ],
+    weekend: ["10:00","11:55","14:10","15:45","18:30","20:15","21:15"]
+  },
+  UDC: {
+    weekday: [
+      "07:15","07:30","07:40","07:45","07:55","08:15","08:20","08:40",
+      "08:45","08:55","09:00","09:15","09:25","09:40","09:45","10:15",
+      "10:45","10:55","11:15","11:45","12:15","12:45","13:15","13:45",
+      "14:15","14:45","15:15","15:45","16:15","16:45","17:30","18:45",
+      "19:15","20:00"
+    ],
+    weekend: []
+  },
+  UC: {
+    weekday: [
+      "08:45","09:15","09:40","10:50","16:40","17:15","17:45","22:10",
+      {t:"22:35",d:[1,2,3,4]},
+      {t:"22:45",d:[5]},
+      "23:15",
+      {t:"23:30",d:[1,2,3,4]}
+    ],
+    weekend: [
+      "09:00","09:45","10:30","11:00","11:45","12:15","12:45","13:15",
+      "14:00","14:30","15:15","16:15","17:15","18:00","18:45","19:45",
+      "20:45","22:00",
+      {t:"22:30",d:[0]},
+      {t:"22:45",d:[6]},
+      "23:15"
+    ]
+  },
+  IU: {
+    weekday: [
+      "07:30","07:40","08:00","08:30","09:00","09:30","10:00","10:30",
+      "11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30",
+      "15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30",
+      "19:00","19:30","20:00","20:30","21:00"
+    ],
+    weekend: []
+  },
+  VS: {
+    weekday: [
+      "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00",
+      "20:00","21:00"
+    ],
+    weekend: [
+      "10:00","10:45","11:30","12:15","13:00","13:45","14:30","15:15",
+      "16:00","16:45","17:30","18:15","19:00","19:45","20:30","21:15"
+    ]
+  },
+  OC: {
+    weekday: ["14:30","16:30","18:30","20:25"],
+    weekend: ["11:25","13:30","15:45","17:45","19:55"]
+  },
+  /* Downtown Express — Fri & Sat nights only */
+  DE: {
+    weekday: [
+      /* Friday evening (jsDay 5) */
+      {t:"21:30",d:[5]},{t:"21:45",d:[5]},{t:"22:00",d:[5]},{t:"22:15",d:[5]},
+      {t:"22:30",d:[5]},{t:"22:45",d:[5]},{t:"23:00",d:[5]},{t:"23:15",d:[5]},
+      {t:"23:30",d:[5]},{t:"23:45",d:[5]}
+    ],
+    weekend: [
+      /* Sat early morning — Fri night continuation (jsDay 6) */
+      {t:"00:00",d:[6]},{t:"00:15",d:[6]},{t:"00:30",d:[6]},{t:"01:00",d:[6]},
+      {t:"01:30",d:[6]},{t:"01:45",d:[6]},{t:"02:00",d:[6]},{t:"02:15",d:[6]},
+      {t:"02:30",d:[6]},{t:"02:45",d:[6]},{t:"03:00",d:[6]},{t:"03:15",d:[6]},
+      /* Sat evening (jsDay 6) */
+      {t:"21:45",d:[6]},{t:"22:00",d:[6]},{t:"22:15",d:[6]},{t:"22:30",d:[6]},
+      {t:"22:45",d:[6]},{t:"23:00",d:[6]},{t:"23:15",d:[6]},{t:"23:30",d:[6]},{t:"23:45",d:[6]},
+      /* Sun early morning — Sat night continuation (jsDay 0) */
+      {t:"00:00",d:[0]},{t:"00:15",d:[0]},{t:"00:30",d:[0]},{t:"01:00",d:[0]},
+      {t:"01:15",d:[0]},{t:"01:45",d:[0]},{t:"02:15",d:[0]},{t:"02:45",d:[0]},
+      {t:"03:00",d:[0]},{t:"03:15",d:[0]}
+    ]
+  },
+  /* Late Nite Westside — Fri & Sat nights, after midnight */
+  LNWS: {
+    weekday: [],
+    weekend: [
+      {t:"00:45",d:[6,0]},{t:"01:10",d:[6,0]},{t:"02:10",d:[6,0]},{t:"03:00",d:[6,0]}
+    ]
+  },
+  /* Late Nite DCL — Fri & Sat nights, after midnight */
+  LNDCL: {
+    weekday: [],
+    weekend: [
+      {t:"00:25",d:[6,0]},{t:"01:00",d:[6,0]},{t:"01:30",d:[6,0]},
+      {t:"02:15",d:[6,0]},{t:"03:05",d:[6,0]}
+    ]
+  }
+};
+
+/* ===================================================================== */
+
+let manualMode = false;
+let dayMode    = 'weekday';
+
+function toMin(str) {
+  const [h, m] = str.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function fmtMin(min) {
+  const h24  = Math.floor(min / 60) % 24;
+  const m    = min % 60;
+  const ampm = h24 < 12 ? 'AM' : 'PM';
+  const h12  = h24 % 12 || 12;
+  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function fmtClock(d) {
+  let h = d.getHours(), m = d.getMinutes(), s = d.getSeconds();
+  const ampm = h < 12 ? 'AM' : 'PM';
+  h = h % 12 || 12;
+  return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${ampm}`;
+}
+
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MON_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function getDepartures(routeKey, now) {
+  const base   = SCHEDULES[routeKey];
+  const modded = MODIFIED.active && MODIFIED.schedules[routeKey];
+  const src    = modded ? modded : base;
+  const jsDay  = now.getDay();
+  const times  = (jsDay === 0 || jsDay === 6) ? src.weekend : src.weekday;
+  return times
+    .filter(e => typeof e === 'string' || e.d.includes(jsDay))
+    .map(e => toMin(typeof e === 'string' ? e : e.t))
+    .sort((a, b) => a - b);
+}
+
+function getNext(departures, nowMin) {
+  const recent = departures.filter(m => m >= nowMin - 3 && m < nowMin);
+  const future = departures.filter(m => m >= nowMin);
+  if (recent.length > 0) {
+    return { next: recent[recent.length - 1], after: future[0] ?? null };
+  }
+  return { next: future[0] ?? null, after: future[1] ?? null };
+}
+
+function updateCard(key, nowMin, departures) {
+  const { next, after } = getNext(departures, nowMin);
+  const nextEl  = document.getElementById(`next-${key}`);
+  const afterEl = document.getElementById(`after-${key}`);
+  const cardEl  = document.getElementById(`card-${key}`);
+
+  if (next === null) {
+    nextEl.textContent = 'No More Service';
+    nextEl.className   = 'dep-time no-svc';
+    afterEl.textContent = 'Service ended for today';
+    afterEl.className   = 'after-time no-more';
+    cardEl.classList.remove('approaching');
+  } else {
+    nextEl.textContent = fmtMin(next);
+    nextEl.className   = 'dep-time';
+    cardEl.classList.toggle('approaching', next >= nowMin && next - nowMin <= 5);
+    if (after === null) {
+      afterEl.textContent = 'Last trip today';
+      afterEl.className   = 'after-time no-more';
+    } else {
+      afterEl.textContent = fmtMin(after);
+      afterEl.className   = 'after-time';
+    }
+  }
+}
+
+function setMode(mode, manual) {
+  dayMode    = mode;
+  manualMode = !!manual;
+  document.getElementById('btnWkd').classList.toggle('active', mode === 'weekday');
+  document.getElementById('btnWkn').classList.toggle('active', mode === 'weekend');
+  document.getElementById('autoLabel').textContent = manual ? 'Manual override' : 'Auto-detected';
+  refresh();
+}
+
+function refresh() {
+  const now    = new Date();
+  const jsDay  = now.getDay();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+
+  if (!manualMode) {
+    const auto = (jsDay === 0 || jsDay === 6) ? 'weekend' : 'weekday';
+    if (auto !== dayMode) setMode(auto, false);
+  }
+
+  document.getElementById('clock').textContent = fmtClock(now);
+  document.getElementById('dateDisplay').textContent =
+    `${DAY_NAMES[jsDay]}, ${MON_NAMES[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+  const modBar = document.getElementById('modBar');
+  if (MODIFIED.active) {
+    modBar.classList.add('on');
+    document.getElementById('modNotice').textContent = MODIFIED.notice;
+  } else {
+    modBar.classList.remove('on');
+  }
+
+  const deps = {};
+  ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','DE','LNWS','LNDCL'].forEach(k => {
+    deps[k] = getDepartures(k, now);
+  });
+
+  /* UC / IU mutual exclusion */
+  const nextIU = deps.IU.find(m => m >= nowMin) ?? null;
+  const nextUC = deps.UC.find(m => m >= nowMin) ?? null;
+  const showIU = nextIU !== null;
+  const showUC = !showIU || (nextUC !== null && nextUC < nextIU);
+  document.getElementById('card-IU').classList.toggle('hidden', !showIU);
+  document.getElementById('card-UC').classList.toggle('hidden', !showUC);
+
+  /* UDC → DE on Fri evening & all Sat; hide both on Sun */
+  const isSunday   = jsDay === 0;
+  const isSaturday = jsDay === 6;
+  const showDE  = !isSunday && (isSaturday || (jsDay === 5 && nowMin >= 21 * 60));
+  const showUDC = !isSunday && !isSaturday && !(jsDay === 5 && nowMin >= 21 * 60);
+  document.getElementById('card-UDC').classList.toggle('hidden', !showUDC);
+  document.getElementById('card-DE').classList.toggle('hidden', !showDE);
+
+  /* Late Nite WS / DCL — replace regular WS & DCL cards when:
+     • actively in LN window (Sat/Sun before 4 AM) — always show LN, OR
+     • Fri/Sat night after 9 PM and regular service has ended for the night */
+  const lnActiveNow  = (isSaturday || isSunday) && nowMin < 4 * 60;
+  const lnPreMidnite = (jsDay === 5 && nowMin >= 21 * 60)
+                     || (isSaturday && nowMin >= 21 * 60);
+  const noMoreDCL    = deps.DCL.filter(m => m >= nowMin).length === 0;
+  const noMoreWS     = deps.WS.filter(m => m >= nowMin).length === 0;
+  const showLNDCL    = lnActiveNow || (lnPreMidnite && noMoreDCL);
+  const showLNWS     = lnActiveNow || (lnPreMidnite && noMoreWS);
+  document.getElementById('card-WS').classList.toggle('hidden', showLNWS);
+  document.getElementById('card-LNWS').classList.toggle('hidden', !showLNWS);
+  document.getElementById('card-DCL').classList.toggle('hidden', showLNDCL);
+  document.getElementById('card-LNDCL').classList.toggle('hidden', !showLNDCL);
+  document.getElementById('lnBar').classList.toggle('on', lnActiveNow);
+
+  ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','DE','LNWS','LNDCL'].forEach(k => {
+    updateCard(k, nowMin, deps[k]);
+  });
+}
+
+refresh();
+setInterval(() => {
+  const now = new Date();
+  document.getElementById('clock').textContent = fmtClock(now);
+  if (now.getSeconds() % 30 === 0) refresh();
+}, 1000);
+
+/* ── SERVICE ALERTS ── */
+async function fetchAlerts() {
+  try {
+    const res = await fetch(
+      'https://binghamtonupublic.etaspot.net/service.php?service=get_service_announcements&token=TESTING'
+    );
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const groups = data.get_service_announcements || [];
+
+    const highAlerts = [];
+    groups.forEach(g => {
+      if (g.type === 'high' && Array.isArray(g.announcements)) {
+        g.announcements.forEach(a => {
+          const text = (a.text || '').trim();
+          if (text && !/no current/i.test(text)) highAlerts.push(text);
+        });
+      }
+    });
+
+    renderAlerts(highAlerts);
+  } catch (e) {
+    /* network/CORS error — leave placeholder as-is */
+    console.warn('Alerts fetch failed:', e);
+  }
+}
+
+function renderAlerts(alerts) {
+  const item = document.getElementById('alertItem');
+  if (!alerts.length) {
+    item.className = 'alert-item green';
+    item.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:1.3vh;height:1.3vh;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> No active alerts`;
+  } else {
+    item.className = 'alert-item red';
+    item.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:1.3vh;height:1.3vh;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9.303 3.376c.866 1.5-.217 3.374-1.948 3.374H4.645c-1.73 0-2.813-1.874-1.948-3.374l7.108-12.248c.866-1.5 3.032-1.5 3.898 0l7.108 12.248z"/></svg> ${alerts.join(' &nbsp;•&nbsp; ')}`;
+  }
+}
+
+fetchAlerts();
+setInterval(fetchAlerts, 60000);
+
+/* ── MIDNIGHT REFRESH ── */
+(function scheduleMidnightRefresh() {
+  const now = new Date();
+  const midnight = new Date(now);
+  midnight.setHours(24, 0, 0, 0);
+  setTimeout(() => location.reload(), midnight - now);
+})();
+</script>
+</body>
+</html>

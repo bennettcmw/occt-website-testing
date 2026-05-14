@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — OCC Transport</title>
+<link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:        #0C2340;
+  --navy-mid:    #163659;
+  --blue:        #1a6fba;
+  --blue-bright: #2684d4;
+  --blue-pale:   #e8f2fb;
+  --blue-muted:  #b8d4ef;
+  --gold:        #e8a000;
+  --gold-light:  #fdf3dc;
+  --white:       #ffffff;
+  --off-white:   #f5f7fa;
+  --gray-100:    #eaecf0;
+  --gray-200:    #d1d5db;
+  --gray-400:    #8a97ab;
+  --gray-600:    #4b5563;
+  --gray-800:    #1f2937;
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 4px rgba(12,35,64,0.07), 0 3px 14px rgba(12,35,64,0.06);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--off-white); color: var(--gray-800); font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #c8cdd4; }
+::-webkit-scrollbar-thumb { background: #5a6a7e; border-radius: 5px; border: 2px solid #c8cdd4; }
+::-webkit-scrollbar-thumb:hover { background: #3d4f63; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 28px; height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-logo img { height: 42px; display: block; }
+.nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.72); font-size: 16px; padding: 8px 15px; border-radius: 6px; white-space: nowrap; transition: color .12s, background .12s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); }
+.nav-cta { background: var(--blue-bright) !important; color: #fff !important; padding: 9px 20px !important; font-weight: 500 !important; }
+.nav-cta:hover { background: #3090df !important; }
+
+/* HAMBURGER / MOBILE NAV */
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; align-items: center; gap: 5px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 2px; transition: transform .2s, opacity .2s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile { display: none; position: fixed; top: 76px; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 99; overflow-y: auto; padding: 12px 0; }
+.nav-mobile.open { display: block; }
+.nav-mobile a { display: block; color: rgba(255,255,255,0.72); font-size: 17px; padding: 15px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color .12s, background .12s; }
+.nav-mobile a:hover, .nav-mobile a.active { color: #fff; background: rgba(255,255,255,0.07); }
+.nav-mobile .mob-cta { background: var(--blue-bright) !important; color: #fff !important; margin: 14px 28px 0; border-radius: 8px; border: none !important; text-align: center; }
+
+/* ALERT */
+.alert-bar { background: #fff3cd; border-bottom: 2px solid #e8a000; padding: 14px 28px; }
+.alert-bar-inner { max-width: 1160px; margin: 0 auto; display: flex; gap: 14px; align-items: flex-start; }
+.alert-bar-inner svg { width: 22px; height: 22px; min-width: 22px; margin-top: 2px; color: #92620a; }
+.alert-bar-inner p { font-size: 16px; font-weight: 500; color: #5c3a00; line-height: 1.6; }
+.alert-bar-inner a { color: #92620a; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+
+/* PAGE HEADER */
+.page-header { background: var(--navy); padding: 40px 28px 36px; }
+.page-header-inner { max-width: 1160px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: rgba(255,255,255,0.38); margin-bottom: 12px; }
+.breadcrumb a { color: rgba(255,255,255,0.5); transition: color .12s; }
+.breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.breadcrumb span { margin: 0 7px; }
+.page-header h1 { font-size: 36px; font-weight: 700; color: #fff; letter-spacing: -0.02em; line-height: 1.1; }
+.page-header p { font-size: 16px; color: rgba(255,255,255,0.52); margin-top: 10px; }
+
+/* LAYOUT */
+.main { max-width: 1160px; margin: 0 auto; padding: 56px 28px 96px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
+.main-col { display: flex; flex-direction: column; gap: 28px; }
+
+/* CARD */
+.card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.card-head { padding: 26px 28px 0; display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.card-head-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-icon svg { width: 22px; height: 22px; color: var(--blue); }
+.card-head h2 { font-size: 20px; font-weight: 600; color: var(--navy); letter-spacing: -0.01em; }
+.card-body { padding: 0 28px 28px; }
+
+/* FORM */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-group:last-of-type { margin-bottom: 0; }
+.form-group label { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+.form-group input,
+.form-group select,
+.form-group textarea { font-family: var(--font); font-size: 16px; color: var(--gray-800); background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 11px 14px; transition: border-color .12s, box-shadow .12s; outline: none; width: 100%; }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--blue-bright); box-shadow: 0 0 0 3px rgba(38,132,212,.12); }
+.form-group textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+.form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24' stroke='%238a97ab' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+.form-note { font-size: 13px; color: var(--gray-400); margin-top: 4px; }
+.btn-submit { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-size: 16px; font-weight: 500; padding: 13px 28px; border-radius: var(--radius-sm); background: var(--blue-bright); color: #fff; border: none; cursor: pointer; transition: background .12s; margin-top: 20px; }
+.btn-submit:hover { background: #3090df; }
+.btn-submit svg { width: 17px; height: 17px; }
+
+/* STAFF TABLE */
+.staff-grid { display: flex; flex-direction: column; gap: 0; }
+.staff-row { display: flex; align-items: baseline; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--gray-100); flex-wrap: wrap; }
+.staff-row:first-child { padding-top: 0; }
+.staff-row:last-child { border-bottom: none; padding-bottom: 0; }
+.staff-name { font-size: 15px; font-weight: 600; color: var(--navy); min-width: 160px; }
+.staff-title { font-size: 14px; color: var(--gray-400); flex: 1; }
+.staff-contact { font-size: 13px; color: var(--blue); white-space: nowrap; }
+.staff-contact a { color: var(--blue); }
+.staff-contact a:hover { color: var(--navy); }
+
+/* INFO ROWS */
+.info-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
+.info-row:first-child { padding-top: 0; }
+.info-row:last-child { border-bottom: none; padding-bottom: 0; }
+.info-icon { width: 40px; height: 40px; border-radius: 9px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.info-icon svg { width: 20px; height: 20px; color: var(--blue); }
+.info-text { font-size: 15px; color: var(--gray-600); line-height: 1.65; }
+.info-text strong { display: block; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.info-text a { color: var(--blue); font-weight: 500; }
+.info-text a:hover { color: var(--navy); }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+.sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.sb-card-head { background: var(--navy); padding: 17px 22px; display: flex; align-items: center; gap: 11px; }
+.sb-card-head svg { width: 18px; height: 18px; color: rgba(255,255,255,0.5); flex-shrink: 0; }
+.sb-card-head h3 { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.9); }
+.sb-card-body { padding: 20px 22px; }
+.sb-card-body p { font-size: 15px; color: var(--gray-600); line-height: 1.7; margin-bottom: 14px; }
+.btn-sb { display: inline-flex; align-items: center; justify-content: center; width: 100%; font-family: var(--font); font-size: 15px; font-weight: 500; padding: 12px; border-radius: var(--radius-sm); background: var(--blue-pale); color: var(--blue); border: 1px solid var(--blue-muted); cursor: pointer; transition: background .12s; text-decoration: none; margin-bottom: 10px; }
+.btn-sb:last-child { margin-bottom: 0; }
+.btn-sb:hover { background: var(--blue-muted); }
+.hours-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 15px; padding: 9px 0; border-bottom: 1px solid var(--gray-100); }
+.hours-row:last-child { border-bottom: none; }
+.hours-day { color: var(--gray-800); font-weight: 500; }
+.hours-time { color: var(--gray-600); }
+.hours-note { font-size: 13px; color: var(--gray-400); margin-top: 12px; line-height: 1.5; }
+
+/* SOCIAL ROW */
+.social-row { display: flex; gap: 10px; margin-top: 4px; }
+.soc-link { width: 38px; height: 38px; border-radius: 8px; background: var(--off-white); border: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: center; transition: background .12s; }
+.soc-link:hover { background: var(--gray-100); }
+.soc-link img { width: 18px; height: 18px; filter: brightness(0); }
+
+/* FOOTER */
+footer { background: var(--navy); padding: 44px 28px 32px; color: rgba(255,255,255,0.45); }
+.footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 200px 1fr auto; gap: 40px; align-items: start; margin-bottom: 28px; }
+.footer-logo img { height: 32px; opacity: 0.8; margin-bottom: 10px; display: block; }
+.footer-logo p   { font-size: 14px; line-height: 1.6; }
+.footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 32px; }
+.footer-links a { font-size: 14px; color: rgba(255,255,255,0.45); transition: color .12s; }
+.footer-links a:hover { color: rgba(255,255,255,0.82); }
+.footer-social { display: flex; gap: 9px; }
+.footer-soc-link { width: 38px; height: 38px; border-radius: 8px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; transition: background .12s; }
+.footer-soc-link:hover { background: rgba(255,255,255,0.13); }
+.footer-soc-link img { width: 18px; height: 18px; filter: brightness(0) invert(0.6); }
+.footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.28); flex-wrap: wrap; gap: 6px; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .main { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 620px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .page-header h1 { font-size: 28px; }
+  .page-header { padding: 28px 20px 24px; }
+  .main { padding: 28px 18px 64px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!nav>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+    </a>
+    <ul class="nav-links">
+      <li><a href="routeschedule.html">Routes &amp; Schedules</a></li>
+      <li><a href="employment.html">Employment</a></li>
+      <li><a href="passtips.html">Passenger Tips</a></li>
+      <li><a href="services.html">Additional Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contactus.html" class="nav-cta active">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="routeschedule.html">Routes &amp; Schedules</a>
+  <a href="employment.html">Employment</a>
+  <a href="passtips.html">Passenger Tips</a>
+  <a href="services.html">Additional Services</a>
+  <a href="about.html">About</a>
+  <a href="news.html">News</a>
+  <a href="contactus.html" class="mob-cta">Contact Us</a>
+</div>
+
+<!-- ============================================================
+     NOTICE BAR — update this on EVERY PAGE that uses it.
+     To change the message: edit the text inside the <p> tag below.
+     To hide it entirely: add style="display:none" to the div.
+     Use VS Code Find in Files (Shift+Cmd+F) to update all pages at once.
+     ============================================================ -->
+
+
+<div class="alert-bar">
+  <div class="alert-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <p>
+      <strong>Service alert:</strong> 
+Due to the ongoing city construction by the Main & Front St intersection, there are currently detours and skipped stops along the WS and MS Inbound routes. See <a href="news.html">News &amp; Info</a> for more information.
+  </div>
+</div>
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>&rsaquo;</span> Contact Us</div>
+    <h1>Contact Us</h1>
+    <p>Questions, feedback, or lost items &mdash; we're here to help.</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="main-col">
+
+    <!-- Contact Form -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        </div>
+        <h2>Send Us a Message</h2>
+      </div>
+      <div class="card-body">
+        <iframe name="hiddenConfirm" id="hiddenConfirm" style="display:none;" onload="if(submitted){window.location='contactus.html';}"></iframe>
+        <form action="https://docs.google.com/forms/u/2/d/e/1FAIpQLScexYbayrJc9dKCYKHa-RB20j_jaqCz_BNAngPRs_TB7nyyRg/formResponse" method="post" target="hiddenConfirm" onsubmit="submitted=true">
+          <p class="form-note" style="margin-bottom:16px;">* is a required field.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="entry_name">Name</label>
+              <input type="text" id="entry_name" name="entry.2005620554" placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="entry_email">Email</label>
+              <input type="email" id="entry_email" name="entry.1045781291" placeholder="Your email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="entry_type">* Type of message</label>
+            <select id="entry_type" name="entry.1065046570" required>
+              <option value="" selected disabled>Select an option&hellip;</option>
+              <option value="Complaint">Complaint</option>
+              <option value="Compliment">Compliment</option>
+              <option value="General Question">General Question</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="entry_desc">* Description</label>
+            <textarea id="entry_desc" name="entry.839337160" required placeholder="Please describe your message in detail."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+        </div>
+        <h2>Other Ways to Reach Us</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <div class="info-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Email</strong>
+            <a href="mailto:office@occtransport.org">office@occtransport.org</a> &mdash; general inquiries<br>
+            <a href="mailto:pr@occtransport.org">pr@occtransport.org</a> &mdash; media &amp; press
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Phone</strong>
+            <a href="tel:+16077776989">(607) 777-6989</a> &mdash; main office<br>
+            <a href="tel:+16077776990">(607) 777-6990</a> &mdash; fax
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Office</strong>
+            University Union West, Room B20 (UUW-B20)<br>
+            Down the Stairs next to Shake Smart
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Social Media</strong>
+            Follow us for real-time service updates and announcements.
+            <div class="social-row">
+              <a href="https://www.instagram.com/buocct/" target="_blank" class="soc-link"><img src="https://occtransport.s3.amazonaws.com/Logos/Instagram+Logo.png" alt="Instagram"></a>
+              <a href="https://twitter.com/OCCT" target="_blank" class="soc-link"><img src="https://occtransport.s3.amazonaws.com/Logos/X+Logo.png" alt="X"></a>
+              <a href="https://www.facebook.com/occtransport/" target="_blank" class="soc-link"><img src="https://occtransport.s3.amazonaws.com/Logos/Facebook+Logo.png" alt="Facebook"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Staff Directory -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+        </div>
+        <h2>Office Staff</h2>
+      </div>
+      <div class="card-body">
+        <div class="staff-grid">
+          <div class="staff-row">
+            <span class="staff-name">Jake Dronke</span>
+            <span class="staff-title">Executive Director</span>
+            <span class="staff-contact"><a href="mailto:director@occtransport.org">director@occtransport.org</a> &middot; (607) 777-6988</span>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Kyle Hussong</span>
+            <span class="staff-title">Operations Director</span>
+            <span class="staff-contact"><a href="mailto:service@occtransport.org">service@occtransport.org</a> &middot; (607) 777-3557</span>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Donna Domenico</span>
+            <span class="staff-title">Office Coordinator</span>
+            <span class="staff-contact"><a href="mailto:office@occtransport.org">office@occtransport.org</a> &middot; (607) 777-6989</span>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Bennett Weitz</span>
+            <span class="staff-title">Public Relations Coordinator</span>
+            <span class="staff-contact"><a href="mailto:pr@occtransport.org">pr@occtransport.org</a> &middot; (607) 777-6916</span>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Haiden Danto-Scanlan</span>
+            <span class="staff-title">Assistant Training Coordinator</span>
+            <span class="staff-contact"><a href="mailto:atc@occtransport.org">atc@occtransport.org</a> &middot; (607) 777-6918</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-col -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>Response Times</h3>
+      </div>
+      <div class="sb-card-body">
+        <div class="hours-row"><span class="hours-day">Mon &ndash; Fri (Fall/Spring)</span><span class="hours-time">9 am &ndash; 5 pm</span></div>
+        <div class="hours-row"><span class="hours-day">Mon &ndash; Fri (Winter/Summer)</span><span class="hours-time">9 am &ndash; 4 pm</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday &ndash; Sunday</span><span class="hours-time">Closed</span></div>
+        <p class="hours-note">Messages received outside office hours will be answered the next business day as soon as possible.</p>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        <h3>Lost an item on the bus?</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>If you left something behind, check the Lost &amp; Found page first before contacting us directly.</p>
+        <a href="lostandfound.html" class="btn-sb">Lost &amp; Found Info</a>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>
+        <h3>Service Alerts</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>Check the News page for service alerts, detours, and schedule changes.</p>
+        <a href="news.html" class="btn-sb">View News &amp; Info</a>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+      <p>Serving the Binghamton University community since 1971.</p>
+    </div>
+    <div class="footer-links">
+      <a href="routeschedule.html">Routes &amp; Schedules</a>
+      <a href="employment.html">Employment</a>
+      <a href="passtips.html">Passenger Tips</a>
+      <a href="services.html">Additional Services</a>
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/occtransport/" class="footer-soc-link" target="_blank"><img src="https://occtransport.s3.amazonaws.com/Logos/Facebook+Logo.png" alt="Facebook"></a>
+      <a href="https://twitter.com/OCCT" class="footer-soc-link" target="_blank"><img src="https://occtransport.s3.amazonaws.com/Logos/X+Logo.png" alt="X"></a>
+      <a href="https://www.instagram.com/buocct/" class="footer-soc-link" target="_blank"><img src="https://occtransport.s3.amazonaws.com/Logos/Instagram+Logo.png" alt="Instagram"></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; OCC Transport Inc.</span>
+    <span>Free to ride with your Binghamton University ID</span>
+  </div>
+</footer>
+
+<script>
+function toggleMobileNav() {
+  const ham = document.getElementById('navHamburger');
+  const mob = document.getElementById('navMobile');
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+</body>
+</html>
