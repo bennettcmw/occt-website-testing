@@ -47,8 +47,8 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
 .nav-links a { color: rgba(255,255,255,0.72); font-size: 16px; padding: 8px 15px; border-radius: 6px; white-space: nowrap; transition: color .12s, background .12s; }
 .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); }
-.nav-cta { background: var(--blue-bright) !important; color: #fff !important; padding: 9px 20px !important; font-weight: 500 !important; }
-.nav-cta:hover { background: #3090df !important; }
+.nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; font-weight: 500 !important; }
+.nav-cta:hover { background: #2272be !important; }
 
 .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; align-items: center; gap: 5px; }
 .nav-hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 2px; transition: transform .2s, opacity .2s; }
@@ -59,7 +59,7 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .nav-mobile.open { display: block; }
 .nav-mobile a { display: block; color: rgba(255,255,255,0.72); font-size: 17px; padding: 15px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color .12s, background .12s; }
 .nav-mobile a:hover, .nav-mobile a.active { color: #fff; background: rgba(255,255,255,0.07); }
-.nav-mobile .mob-cta { background: var(--blue-bright) !important; color: #fff !important; margin: 14px 28px 0; border-radius: 8px; border: none !important; text-align: center; }
+.nav-mobile .mob-cta { background: var(--blue) !important; color: #fff !important; margin: 14px 28px 0; border-radius: 8px; border: none !important; text-align: center; }
 
 /* ALERT */
 .alert-bar { background: #fff3cd; border-bottom: 2px solid #e8a000; padding: 14px 28px; }
@@ -223,7 +223,7 @@ footer { color: rgba(255,255,255,0.80) !important; }
 <script>document.querySelector('.alert-bar a[href="news.html"]').href='../../news.html';</script>
 
 <!-- PAGE HEADER -->
-<div class="page-header">
+<div class="page-header" role="region" aria-label="Page header">
   <div class="page-header-inner">
     <div class="breadcrumb">
       <a href="../../index.html">Home</a>

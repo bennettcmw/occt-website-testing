@@ -47,8 +47,8 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
 .nav-links a { color: rgba(255,255,255,0.72); font-size: 16px; padding: 8px 15px; border-radius: 6px; white-space: nowrap; transition: color .12s, background .12s; }
 .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-.nav-cta { background: var(--blue-bright) !important; color: #fff !important; padding: 9px 20px !important; font-weight: 500 !important; }
-.nav-cta:hover { background: #3090df !important; }
+.nav-cta { background: var(--blue) !important; color: #fff !important; padding: 9px 20px !important; font-weight: 500 !important; }
+.nav-cta:hover { background: #2272be !important; }
 
 /* HAMBURGER / MOBILE NAV */
 .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; align-items: center; gap: 5px; }
@@ -60,7 +60,7 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .nav-mobile.open { display: block; }
 .nav-mobile a { display: block; color: rgba(255,255,255,0.72); font-size: 17px; padding: 15px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color .12s, background .12s; }
 .nav-mobile a:hover, .nav-mobile a.active { color: #fff; background: rgba(255,255,255,0.07); }
-.nav-mobile .mob-cta { background: var(--blue-bright) !important; color: #fff !important; margin: 14px 28px 0; border-radius: 8px; border: none !important; text-align: center; }
+.nav-mobile .mob-cta { background: var(--blue) !important; color: #fff !important; margin: 14px 28px 0; border-radius: 8px; border: none !important; text-align: center; }
 
 /* ALERT */
 .alert-bar { background: #fff3cd; border-bottom: 2px solid #e8a000; padding: 14px 28px; }
@@ -234,6 +234,7 @@ footer { color: rgba(255,255,255,0.80) !important; }
 .breadcrumb a { color: rgba(255,255,255,0.80) !important; }
 .route-chip-desc { color: rgba(255,255,255,0.80) !important; }
 .routes-panel-foot a { color: #7cc5f5 !important; }
+.routes-panel-label { font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 /* ─────────────────────────────────────────────────────────────────────────── */
 </style>
 </head>
@@ -289,12 +290,12 @@ footer { color: rgba(255,255,255,0.80) !important; }
 
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" aria-labelledby="hero-heading">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-text">
       <p class="hero-label">OCC Transport at Binghamton University &nbsp;&middot;&nbsp; Est. 1971</p>
-      <h1>Getting Binghamton<br><span>Moving!</span></h1>
+      <h1 id="hero-heading">Getting Binghamton<br><span>Moving!</span></h1>
       <p style="font-size:14px;font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:18px;margin-top:-8px;">At OCCT, we Operate with Caution, Care, and Teamwork</p>
       <p class="hero-sub">Free to ride with your Binghamton University ID. Check schedules, track your bus live, and find your route below. Thank you for riding with OCC Transport, Binghamton University's student-run and operated bus company.</p>
       <div class="hero-btns">
@@ -311,7 +312,7 @@ footer { color: rgba(255,255,255,0.80) !important; }
 
     <!-- ROUTES PANEL -->
     <div class="routes-panel">
-      <div class="routes-panel-head"><h3>Quick Links &middot; Routes</h3></div>
+      <div class="routes-panel-head"><p class="routes-panel-label">Quick Links &middot; Routes</p></div>
       <div class="route-scroll">
         <a href="routes/ws.html"  class="route-chip"><span class="route-chip-tag">WS</span><span class="route-chip-desc">Westside Shuttle</span></a>
         <a href="routes/ms.html"  class="route-chip"><span class="route-chip-tag">MS</span><span class="route-chip-desc">Main Street Shuttle</span></a>
@@ -438,7 +439,7 @@ footer { color: rgba(255,255,255,0.80) !important; }
       </div>
       <div class="sb-card-body" style="background: #fdf3dc;">
         <p>If you left something on one of our buses, click below to find out what to do next.</p>
-        <a href="lostandfound.html" class="btn-sb" style="background:#e8a000;color:#fff;border-color:#c87f00;">View Information about Lost Items</a>
+        <a href="lostandfound.html" class="btn-sb" style="background:#e8a000;color:#3d2200;border-color:#c87f00;">View Information about Lost Items</a>
       </div>
     </div>
 
