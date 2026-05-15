@@ -167,6 +167,9 @@ footer { background: var(--navy); padding: 44px 28px 32px; color: rgba(255,255,2
 .footer-soc-link img { width: 18px; height: 18px; filter: brightness(0) invert(0.6); }
 .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.28); flex-wrap: wrap; gap: 6px; }
 
+/* HONEYPOT */
+.hp-field { opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1; overflow: hidden; }
+
 /* TOAST */
 .toast { position: fixed; bottom: 24px; left: 24px; background: #16a34a; color: #fff; font-size: 15px; font-weight: 500; padding: 13px 20px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.18); display: flex; align-items: center; gap: 10px; z-index: 999; opacity: 0; transform: translateY(10px); transition: opacity .22s, transform .22s; pointer-events: none; }
 .toast.show { opacity: 1; transform: translateY(0); }
@@ -263,7 +266,7 @@ Due to the ongoing city construction by the Main & Front St intersection, there 
       </div>
       <div class="card-body">
         <iframe name="hiddenConfirm" id="hiddenConfirm" style="display:none;" onload="if(submitted){window.location='contactus.html?sent=1';}"></iframe>
-        <form action="https://docs.google.com/forms/u/2/d/e/1FAIpQLScexYbayrJc9dKCYKHa-RB20j_jaqCz_BNAngPRs_TB7nyyRg/formResponse" method="post" target="hiddenConfirm" onsubmit="submitted=true">
+        <form action="https://docs.google.com/forms/u/2/d/e/1FAIpQLScexYbayrJc9dKCYKHa-RB20j_jaqCz_BNAngPRs_TB7nyyRg/formResponse" method="post" target="hiddenConfirm" onsubmit="return handleSubmit(this)">
           <p class="form-note" style="margin-bottom:16px;">* is a required field.</p>
           <div class="form-row">
             <div class="form-group">
@@ -288,10 +291,12 @@ Due to the ongoing city construction by the Main & Front St intersection, there 
             <label for="entry_desc">* Description</label>
             <textarea id="entry_desc" name="entry.839337160" required placeholder="Please describe your message in detail."></textarea>
           </div>
+          <div class="hp-field" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
           <button type="submit" class="btn-submit">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
             Send Message
           </button>
+          <p id="spam-error" style="display:none;color:#dc2626;font-size:14px;margin-top:10px;">Your message was flagged as spam. Please remove any links or special characters and try again.</p>
         </form>
       </div>
     </div>
@@ -468,6 +473,27 @@ Due to the ongoing city construction by the Main & Front St intersection, there 
 </footer>
 
 <script>
+var formLoadTime = Date.now();
+
+function isSpam(form) {
+  if (form.querySelector('[name="website"]').value) return true;
+  if (Date.now() - formLoadTime < 3000) return true;
+  var fields = form.querySelectorAll('input[type="text"], textarea');
+  var patterns = [/https?:\/\//i, /[a-z0-9.-]+\.[a-z]{2,}\/\S+/i, />>>/, /<<</, /[\uD800-\uDFFF]/];
+  for (var i = 0; i < fields.length; i++)
+    for (var j = 0; j < patterns.length; j++)
+      if (patterns[j].test(fields[i].value)) return true;
+  return false;
+}
+
+function handleSubmit(form) {
+  var err = document.getElementById('spam-error');
+  if (isSpam(form)) { err.style.display = 'block'; return false; }
+  err.style.display = 'none';
+  submitted = true;
+  return true;
+}
+
 function showToast() {
   const t = document.getElementById('toast');
   t.classList.add('show');
