@@ -79,8 +79,10 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .page-header p { font-size: 16px; color: rgba(255,255,255,0.52); margin-top: 10px; }
 
 /* LAYOUT */
-.main { max-width: 1160px; margin: 0 auto; padding: 56px 28px 96px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
-.main-col { display: flex; flex-direction: column; gap: 28px; }
+.main { max-width: 1160px; margin: 0 auto; padding: 56px 28px 96px; display: grid; grid-template-columns: 1fr 300px; grid-template-areas: "program sidebar" "form sidebar"; gap: 36px; align-items: start; }
+.main-col { grid-area: program; display: flex; flex-direction: column; gap: 28px; }
+.main-form { grid-area: form; }
+.sidebar { grid-area: sidebar; }
 
 /* CARD */
 .card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
@@ -167,7 +169,7 @@ footer { background: var(--navy); padding: 44px 28px 32px; color: rgba(255,255,2
 
 /* RESPONSIVE */
 @media (max-width: 960px) {
-  .main { grid-template-columns: 1fr; }
+  .main { grid-template-columns: 1fr; grid-template-areas: "program" "sidebar" "form"; }
   .footer-inner { grid-template-columns: 1fr; gap: 22px; }
 }
 @media (max-width: 620px) {
@@ -296,8 +298,10 @@ footer { color: rgba(255,255,255,0.80) !important; }
       </div>
     </div>
 
-    <!-- Training Interest Form -->
-    <div class="card">
+  </div><!-- /main-col -->
+
+  <!-- Training Interest Form -->
+  <div class="card main-form">
       <div class="card-head">
         <div class="card-head-icon">
           <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
@@ -370,8 +374,6 @@ footer { color: rgba(255,255,255,0.80) !important; }
         </form>
       </div>
     </div>
-
-  </div><!-- /main-col -->
 
   <!-- SIDEBAR -->
   <div class="sidebar">

@@ -112,6 +112,8 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .cancel-table tr:last-child td { border-bottom: none; }
 .cancel-table td:first-child { font-weight: 500; color: var(--gray-800); }
 .cancel-fee-none { color: #1a7a45 !important; font-weight: 500 !important; }
+.cancel-fee-quarter { color: #ca8a04 !important; font-weight: 500 !important; }
+.cancel-fee-half { color: #ea580c !important; font-weight: 500 !important; }
 .cancel-fee-full { color: #b91c1c !important; font-weight: 500 !important; }
 
 /* CALLOUT */
@@ -341,11 +343,11 @@ footer { color: rgba(255,255,255,0.80) !important; }
             </tr>
             <tr>
               <td>4 &ndash; 6 days prior</td>
-              <td>25% of estimated cost</td>
+              <td class="cancel-fee-quarter">25% of estimated cost</td>
             </tr>
             <tr>
               <td>1 &ndash; 3 days prior</td>
-              <td>50% of estimated cost</td>
+              <td class="cancel-fee-half">50% of estimated cost</td>
             </tr>
             <tr>
               <td>Under 24 hours</td>
