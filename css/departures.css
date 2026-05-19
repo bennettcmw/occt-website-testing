@@ -226,6 +226,16 @@ body {
 }
 .dir-tag svg { flex-shrink: 0; width: 1.2vh; height: 1.2vh; }
 
+.cross-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35vw;
+  margin-top: 0.4vh;
+  font-size: 1.15vh;
+  color: var(--muted);
+}
+.cross-tag svg { flex-shrink: 0; width: 1.2vh; height: 1.2vh; }
+
 .mohawk-tag {
   display: inline-flex;
   align-items: center;
