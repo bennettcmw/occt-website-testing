@@ -24,7 +24,7 @@
   --gray-400:    #5c6b7d;
   --gray-600:    #4b5563;
   --gray-800:    #1f2937;
-  --route-color: #E65100;
+  --route-color: #AEE1AE;
   --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --radius: 12px;
   --radius-sm: 8px;
@@ -72,14 +72,14 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 /*header*/
 .page-header { background: var(--route-color); padding: 40px 28px 36px; }
 .page-header-inner { max-width: 1160px; margin: 0 auto; }
-.breadcrumb { font-size: 13px; color: rgba(255,255,255,0.38); margin-bottom: 12px; }
-.breadcrumb a { color: rgba(255,255,255,0.5); transition: color .12s; }
-.breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.breadcrumb { font-size: 13px; color: rgba(12,35,64,0.65); margin-bottom: 12px; }
+.breadcrumb a { color: #0C2340; transition: color .12s; }
+.breadcrumb a:hover { color: #000; }
 .breadcrumb span { margin: 0 7px; }
 .page-header-title { display: flex; align-items: center; gap: 16px; }
-.route-badge-lg { font-size: 22px; font-weight: 700; color: #fff; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; letter-spacing: 0.04em; flex-shrink: 0; }
-.page-header h1 { font-size: 36px; font-weight: 700; color: #fff; letter-spacing: -0.02em; line-height: 1.1; }
-.page-header p { font-size: 16px; color: rgba(255,255,255,0.52); margin-top: 10px; }
+.route-badge-lg { font-size: 22px; font-weight: 700; color: #0C2340; background: rgba(12,35,64,0.12); border-radius: 8px; padding: 6px 14px; letter-spacing: 0.04em; flex-shrink: 0; }
+.page-header h1 { font-size: 36px; font-weight: 700; color: #0C2340; letter-spacing: -0.02em; line-height: 1.1; }
+.page-header p { font-size: 16px; color: rgba(12,35,64,0.65); margin-top: 10px; }
 
 /*layout*/
 .main { max-width: 1160px; margin: 0 auto; padding: 48px 28px 96px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
@@ -101,8 +101,8 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .stop-row { display: flex; align-items: center; gap: 14px; padding: 11px 16px; border-bottom: 1px solid var(--gray-100); position: relative; }
 .stop-row:last-child { border-bottom: none; }
 .stop-row:hover { background: var(--blue-pale); }
-.stop-num { width: 24px; height: 24px; border-radius: 50%; background: var(--route-color); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.stop-row.terminus .stop-num { background: var(--navy); }
+.stop-num { width: 24px; height: 24px; border-radius: 50%; background: var(--route-color); color: #000; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.stop-row.terminus .stop-num { background: var(--navy); color: #fff; }
 .stop-info-wrap { flex: 1; min-width: 0; }
 .stop-name { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.3; }
 .stop-sub { font-size: 12px; color: var(--gray-400); margin-top: 1px; }
@@ -112,7 +112,7 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 /*schedule*/
 .schedule-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
 .sched-tab { font-family: var(--font); font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: var(--radius-sm); border: 1px solid var(--gray-200); background: var(--off-white); color: var(--gray-600); cursor: pointer; transition: all .12s; }
-.sched-tab.active { background: var(--route-color); border-color: var(--route-color); color: #fff; }
+.sched-tab.active { background: var(--route-color); border-color: var(--route-color); color: #000; }
 .sched-panel { display: none; }
 .sched-panel.active { display: block; }
 .sched-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-sm); border: 1px solid var(--gray-100); }
@@ -148,7 +148,7 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .other-routes { display: flex; flex-direction: column; gap: 6px; }
 .other-route-link { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); border: 1px solid var(--gray-100); background: var(--off-white); text-decoration: none; transition: border-color .12s, background .12s; }
 .other-route-link:hover { background: var(--blue-pale); border-color: var(--blue-muted); }
-.other-route-link.current { background: rgba(230,81,0,0.07); border-color: rgba(230,81,0,0.25); cursor: default; pointer-events: none; }
+.other-route-link.current { background: rgba(174,225,174,0.25); border-color: rgba(174,225,174,0.6); cursor: default; pointer-events: none; }
 .other-route-badge { font-size: 11px; font-weight: 700; color: #fff; border-radius: 4px; padding: 2px 7px; letter-spacing: 0.04em; flex-shrink: 0; min-width: 38px; text-align: center; }
 .other-route-name { font-size: 13px; color: var(--gray-800); font-weight: 500; }
 .badge-ws  { background: #191970; }
@@ -159,7 +159,7 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .badge-cs  { background: #228B22; }
 .badge-uc  { background: #BF40BF; }
 .badge-iu  { background: #CF9FFF; color: #000; }
-.badge-riu { background: #E65100; }
+.badge-riu { background: #AEE1AE; color: #000; }
 .badge-vs  { background: #E37383; }
 .badge-oc  { background: #FFC000; color: #000; }
 .badge-ics { background: rgb(174,225,174); color: #000; }
@@ -216,8 +216,8 @@ footer { color: rgba(255,255,255,0.80) !important; }
 .footer-links a:hover { color: rgba(255,255,255,1) !important; }
 .footer-bottom { color: rgba(255,255,255,0.68) !important; }
 .footer-logo p { color: rgba(255,255,255,0.80) !important; }
-.breadcrumb { color: rgba(255,255,255,0.68) !important; }
-.breadcrumb a { color: rgba(255,255,255,0.80) !important; }
+.breadcrumb { color: rgba(12,35,64,0.65) !important; }
+.breadcrumb a { color: #0C2340 !important; }
 .route-chip-desc { color: rgba(255,255,255,0.80) !important; }
 .routes-panel-foot a { color: #7cc5f5 !important; }
 /* ─────────────────────────────────────────────────────────────────────────── */
@@ -303,7 +303,7 @@ footer { color: rgba(255,255,255,0.80) !important; }
 
       <div class="card-body">
         <div class="callout">
-          The RIU Shuttle travels around campus making stops at Susquehanna and Hillside, Mohawk, Newing, the East and West Gyms, Clearview, and Hinman / Academic A, while also traveling off-campus making stops at the Innovative Tech Complex (ITC), UClub / University Plaza, Meadows, Hayes, and Washington Dr &amp; Lehigh Av. <strong>The RIU Shuttle runs in continuous scheduled loops on Green Buses all-day on Weekdays in the Summer only.</strong>
+          The RIU Shuttle travels around campus making stops at Clearview, Susquehanna, Hillside, Hinman / Academic A, Mohawk, Newing, Couper Administration, and the East Gym, while also traveling off-campus making stops at the Innovative Tech Complex (ITC), UClub / University Plaza, Meadows, Hayes, and Washington Dr &amp; Lehigh Av. <strong>The RIU Shuttle runs in continuous scheduled loops on Green Buses all-day on Weekdays in the Summer only.</strong>
         </div>
 
         <!-- Stops -->
@@ -320,49 +320,49 @@ footer { color: rgba(255,255,255,0.80) !important; }
             <div class="stop-row">
               <div class="stop-num">2</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/susquehanna.html">Susquehanna</a></div>
+                <div class="stop-name"><a href="../stops/clearview.html">Clearview</a></div>
               </div>
             </div>
             <div class="stop-row">
               <div class="stop-num">3</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/hillside.html">Hillside</a></div>
+                <div class="stop-name"><a href="../stops/susquehanna.html">Susquehanna</a></div>
               </div>
             </div>
             <div class="stop-row">
               <div class="stop-num">4</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/mohawk.html">Mohawk</a></div>
+                <div class="stop-name"><a href="../stops/hillside.html">Hillside</a></div>
               </div>
             </div>
             <div class="stop-row">
               <div class="stop-num">5</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/newing.html">Newing</a></div>
+                <div class="stop-name"><a href="../stops/hinman.html">Hinman / Academic A</a></div>
               </div>
             </div>
             <div class="stop-row">
               <div class="stop-num">6</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/eastgym.html">East Gym</a></div>
+                <div class="stop-name"><a href="../stops/mohawk.html">Mohawk</a></div>
               </div>
             </div>
             <div class="stop-row">
               <div class="stop-num">7</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/westgym.html">West Gym</a></div>
+                <div class="stop-name"><a href="../stops/newing.html">Newing</a></div>
               </div>
             </div>
             <div class="stop-row">
               <div class="stop-num">8</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/clearview.html">Clearview</a></div>
+                <div class="stop-name"><a href="../stops/couperadmin.html">Couper Administration</a></div>
               </div>
             </div>
             <div class="stop-row">
               <div class="stop-num">9</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/hinman.html">Hinman / Academic A</a></div>
+                <div class="stop-name"><a href="../stops/eastgym.html">East Gym</a></div>
               </div>
             </div>
             <div class="stop-row">
@@ -374,7 +374,7 @@ footer { color: rgba(255,255,255,0.80) !important; }
             <div class="stop-row">
               <div class="stop-num">11</div>
               <div class="stop-info-wrap">
-                <div class="stop-name"><a href="../stops/uclub-tower.html">UClub - University Plaza</a></div>
+                <div class="stop-name"><a href="../stops/uclub.html">UClub / University Plaza (Bus Shelter)</a></div>
               </div>
             </div>
             <div class="stop-row">

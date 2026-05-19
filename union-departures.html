@@ -358,6 +358,16 @@ body {
 .ln-bar.on { display: block; }
 .ln-bar .mod-bar-inner { color: #c084fc; }
 
+/* ── SUMMER: NO WEEKEND SERVICE BAR ── */
+.no-wkn-bar {
+  flex-shrink: 0;
+  background: rgba(12,35,64,0.95);
+  border-bottom: 1px solid rgba(38,132,212,0.45);
+  padding: 0.7vh 2.2vw;
+  display: none;
+}
+.no-wkn-bar .mod-bar-inner { color: #93c5fd; }
+
 /* ── DISCLAIMER ── */
 .disclaimer {
   flex-shrink: 0;
@@ -399,6 +409,16 @@ body {
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
     </svg>
     <span id="modNotice"></span>
+  </div>
+</div>
+
+<!-- SUMMER: NO WEEKEND SERVICE -->
+<div class="no-wkn-bar" id="noWknBar">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+    </svg>
+    <span>No OCCT service operates on summer weekends. Please use BC Transit for weekend transportation.</span>
   </div>
 </div>
 
@@ -530,8 +550,19 @@ body {
     </div>
     <div class="panel-body">
 
-      <!-- IU (ITC-UClub) — hidden when no more service today -->
-      <div class="dep-row" id="card-IU">
+      <!-- SUMMER: RIU replaces IU — departs Union, weekdays 8 AM–6 PM every 30 min -->
+      <div class="dep-row" id="card-RIU">
+        <div><span class="badge dark" style="background:#AEE1AE;">RIU</span></div>
+        <div class="td-dest">
+          <div class="route-name">Residential&mdash;ITC&mdash;UClub Shuttle</div>
+          <div class="route-stops">Res. Halls; Mohawk; ITC; UClub; Meadows; Hayes</div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-RIU">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-RIU">--</div></div>
+      </div>
+
+      <!-- IU (ITC-UClub) — Fall semester; kept for reactivation -->
+      <!-- <div class="dep-row hidden" id="card-IU">
         <div><span class="badge dark" style="background:#CF9FFF;">IU</span></div>
         <div class="td-dest">
           <div class="route-name">ITC&mdash;UClub Shuttle</div>
@@ -543,9 +574,9 @@ body {
         </div>
         <div class="td-time"><div class="dep-time" id="next-IU">--</div></div>
         <div class="td-after"><div class="after-time" id="after-IU">--</div></div>
-      </div>
+      </div> -->
 
-      <!-- UC (UCLUB) — hidden when ITC-UClub is next -->
+      <!-- UC (UCLUB) — evening only in summer -->
       <div class="dep-row" id="card-UC">
         <div><span class="badge" style="background:#BF40BF;">UC</span></div>
         <div class="td-dest">
@@ -570,6 +601,7 @@ body {
         <div class="td-after"><div class="after-time" id="after-VS">--</div></div>
       </div>
 
+      <!-- SUMMER: OC removed — restore for fall
       <div class="dep-row" id="card-OC">
         <div><span class="badge dark" style="background:#FFC000;">OC</span></div>
         <div class="td-dest">
@@ -579,6 +611,7 @@ body {
         <div class="td-time"><div class="dep-time" id="next-OC">--</div></div>
         <div class="td-after"><div class="after-time" id="after-OC">--</div></div>
       </div>
+      -->
 
     </div>
   </div>
@@ -619,18 +652,16 @@ const MODIFIED = {
   active: false,
   notice: "Modified schedule in effect. Times below reflect today's adjusted service.",
   schedules: {
-    // WS: { weekday: [], weekend: [] },
-    // DCL: { weekday: [], weekend: [] },
-    // MS: { weekday: [], weekend: [] },
-    // DS: { weekday: [], weekend: [] },
-    // UDC: { weekday: [], weekend: [] },
-    // UC: { weekday: [], weekend: [] },
-    // IU: { weekday: [], weekend: [] },
-    // VS: { weekday: [], weekend: [] },
-    // OC: { weekday: [], weekend: [] },
-    // DE: { weekday: [], weekend: [] },
-    // LNWS: { weekday: [], weekend: [] },
-    // LNDCL: { weekday: [], weekend: [] },
+    // WS:   { weekday: [], weekend: [] },
+    // DCL:  { weekday: [], weekend: [] },
+    // MS:   { weekday: [], weekend: [] },
+    // DS:   { weekday: [], weekend: [] },
+    // UC:   { weekday: [], weekend: [] },
+    // RIU:  { weekday: [], weekend: [] },
+    // VS:   { weekday: [], weekend: [] },
+    // IU:   { weekday: [], weekend: [] },  // Fall semester
+    // LNWS: { weekday: [], weekend: [] },  // Fall semester
+    // LNDCL:{ weekday: [], weekend: [] },  // Fall semester
   }
 };
 
@@ -640,83 +671,47 @@ const MODIFIED = {
  *   0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat
  * UC and IU depart from Mohawk Stop (across the street from Union).
  * ===================================================================== */
+/* ── SUMMER 2026 SCHEDULES ── All times 24h "HH:MM", weekdays only.
+ * Fall semester: restore weekend arrays and restore IU/DE/LNWS/LNDCL blocks.
+ * =========================================================================== */
 const SCHEDULES = {
   WS: {
-    weekday: [
-      "07:15","08:00","08:20","09:25","09:55","10:45","11:15","11:45",
-      "12:10","12:40","13:25","14:10","14:45","15:10","15:45","16:45",
-      "16:55","17:25","17:45","18:20","19:10","19:25","19:45","20:15",
-      "20:35","21:10","21:40",
-      {t:"22:35",d:[5]},
-      {t:"22:50",d:[1,2,3,4]},
-      "23:45"
-    ],
-    weekend: [
-      "09:15","10:00","11:15","12:00","13:25","14:30","15:40","16:30",
-      "18:25","19:15","21:00","21:15",
-      {t:"22:00",d:[0]},
-      "22:35","23:45"
-    ]
+    weekday: ["08:15","09:00","10:35","11:25","13:35","15:10","16:40","19:40"],
+    weekend: []
   },
   DCL: {
-    weekday: [
-      "07:45","08:15","09:05","09:55","10:25","10:45","11:05","11:20",
-      "11:55","12:30","13:20","14:10","15:00","15:35","16:15","16:50",
-      "17:05","17:40","18:00","18:20","18:40","19:10","19:40","20:25",
-      "20:55","21:30","21:55",
-      {t:"22:50",d:[1,2,3,4]},
-      {t:"23:00",d:[5]},
-      "23:45"
-    ],
-    weekend: [
-      "08:45","09:30","10:45","12:45","13:45","14:55","16:25","17:40",
-      "19:10","20:30",
-      {t:"21:45",d:[0]},
-      "21:55"
-    ]
+    weekday: ["07:30","08:55","10:40","12:10","13:45","15:55","16:50","18:45"],
+    weekend: []
   },
   MS: {
-    weekday: [
-      "07:30","08:35","09:30","10:25","11:35","12:25","13:15","14:15",
-      "15:35","16:30","17:40","18:40","19:40","20:40",
-      {t:"21:40",d:[1,2,3,4]}
-    ],
-    weekend: ["10:40","12:40","15:00","17:15","20:00"]
+    weekday: ["08:00","09:45","12:50","15:15","17:35"],
+    weekend: []
   },
   DS: {
-    weekday: [
-      "10:05","11:35","12:35","13:35","14:40","15:55","17:25",
-      "18:35","19:30","20:35","21:20"
-    ],
-    weekend: ["10:00","11:55","14:10","15:45","18:30","20:15","21:15"]
+    weekday: ["09:40","11:55","14:20","18:05","19:45"],
+    weekend: []
   },
-  UDC: {
+  UDC: { weekday: [], weekend: [] }, /* UDC Express — not in summer service */
+  UC: {
+    weekday: ["18:30","19:30"], /* Evening only — departs Mohawk Stop */
+    weekend: []
+  },
+  RIU: { /* Residential-ITC-UClub Shuttle — departs Union every 30 min */
     weekday: [
-      "07:15","07:30","07:40","07:45","07:55","08:15","08:20","08:40",
-      "08:45","08:55","09:00","09:15","09:25","09:40","09:45","10:15",
-      "10:45","10:55","11:15","11:45","12:15","12:45","13:15","13:45",
-      "14:15","14:45","15:15","15:45","16:15","16:45","17:30","18:45",
-      "19:15","20:00"
+      "08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30",
+      "12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30",
+      "16:00","16:30","17:00","17:30","18:00"
     ],
     weekend: []
   },
-  UC: {
-    weekday: [
-      "08:45","09:15","09:40","10:50","16:40","17:15","17:45","22:10",
-      {t:"22:35",d:[1,2,3,4]},
-      {t:"22:45",d:[5]},
-      "23:15",
-      {t:"23:30",d:[1,2,3,4]}
-    ],
-    weekend: [
-      "09:00","09:45","10:30","11:00","11:45","12:15","12:45","13:15",
-      "14:00","14:30","15:15","16:15","17:15","18:00","18:45","19:45",
-      "20:45","22:00",
-      {t:"22:30",d:[0]},
-      {t:"22:45",d:[6]},
-      "23:15"
-    ]
+  VS: {
+    weekday: ["11:20","12:55","14:30","17:25","19:00"],
+    weekend: []
   },
+  OC: { weekday: [], weekend: [] }, /* Not in summer service */
+  DE: { weekday: [], weekend: [] }, /* Not in summer service */
+
+  /* ── FALL SEMESTER — kept for reactivation ──────────────────────────────
   IU: {
     weekday: [
       "07:30","07:40","08:00","08:30","09:00","09:30","10:00","10:30",
@@ -726,57 +721,36 @@ const SCHEDULES = {
     ],
     weekend: []
   },
-  VS: {
+  ── Late Nite Westside (Fri & Sat after midnight):
+  LNWS: { weekday: [], weekend: [
+    {t:"00:45",d:[6,0]},{t:"01:10",d:[6,0]},{t:"02:10",d:[6,0]},{t:"03:00",d:[6,0]}
+  ]},
+  ── Late Nite DCL (Fri & Sat after midnight):
+  LNDCL: { weekday: [], weekend: [
+    {t:"00:25",d:[6,0]},{t:"01:00",d:[6,0]},{t:"01:30",d:[6,0]},
+    {t:"02:15",d:[6,0]},{t:"03:05",d:[6,0]}
+  ]},
+  ── Downtown Express (Fri & Sat nights):
+  DE_FALL: {
     weekday: [
-      "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00",
-      "20:00","21:00"
-    ],
-    weekend: [
-      "10:00","10:45","11:30","12:15","13:00","13:45","14:30","15:15",
-      "16:00","16:45","17:30","18:15","19:00","19:45","20:30","21:15"
-    ]
-  },
-  OC: {
-    weekday: ["14:30","16:30","18:30","20:25"],
-    weekend: ["11:25","13:30","15:45","17:45","19:55"]
-  },
-  /* Downtown Express — Fri & Sat nights only */
-  DE: {
-    weekday: [
-      /* Friday evening (jsDay 5) */
       {t:"21:30",d:[5]},{t:"21:45",d:[5]},{t:"22:00",d:[5]},{t:"22:15",d:[5]},
       {t:"22:30",d:[5]},{t:"22:45",d:[5]},{t:"23:00",d:[5]},{t:"23:15",d:[5]},
       {t:"23:30",d:[5]},{t:"23:45",d:[5]}
     ],
     weekend: [
-      /* Sat early morning — Fri night continuation (jsDay 6) */
       {t:"00:00",d:[6]},{t:"00:15",d:[6]},{t:"00:30",d:[6]},{t:"01:00",d:[6]},
       {t:"01:30",d:[6]},{t:"01:45",d:[6]},{t:"02:00",d:[6]},{t:"02:15",d:[6]},
       {t:"02:30",d:[6]},{t:"02:45",d:[6]},{t:"03:00",d:[6]},{t:"03:15",d:[6]},
-      /* Sat evening (jsDay 6) */
       {t:"21:45",d:[6]},{t:"22:00",d:[6]},{t:"22:15",d:[6]},{t:"22:30",d:[6]},
       {t:"22:45",d:[6]},{t:"23:00",d:[6]},{t:"23:15",d:[6]},{t:"23:30",d:[6]},{t:"23:45",d:[6]},
-      /* Sun early morning — Sat night continuation (jsDay 0) */
       {t:"00:00",d:[0]},{t:"00:15",d:[0]},{t:"00:30",d:[0]},{t:"01:00",d:[0]},
       {t:"01:15",d:[0]},{t:"01:45",d:[0]},{t:"02:15",d:[0]},{t:"02:45",d:[0]},
       {t:"03:00",d:[0]},{t:"03:15",d:[0]}
     ]
   },
-  /* Late Nite Westside — Fri & Sat nights, after midnight */
-  LNWS: {
-    weekday: [],
-    weekend: [
-      {t:"00:45",d:[6,0]},{t:"01:10",d:[6,0]},{t:"02:10",d:[6,0]},{t:"03:00",d:[6,0]}
-    ]
-  },
-  /* Late Nite DCL — Fri & Sat nights, after midnight */
-  LNDCL: {
-    weekday: [],
-    weekend: [
-      {t:"00:25",d:[6,0]},{t:"01:00",d:[6,0]},{t:"01:30",d:[6,0]},
-      {t:"02:15",d:[6,0]},{t:"03:05",d:[6,0]}
-    ]
-  }
+  ─────────────────────────────────────────────────────────────────────────── */
+  LNWS:  { weekday: [], weekend: [] },
+  LNDCL: { weekday: [], weekend: [] }
 };
 
 /* ===================================================================== */
@@ -885,33 +859,28 @@ function refresh() {
     modBar.classList.remove('on');
   }
 
+  /* Summer: show no-weekend banner when weekend mode is active */
+  document.getElementById('noWknBar').style.display = (dayMode === 'weekend') ? 'block' : 'none';
+
   const deps = {};
-  ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','DE','LNWS','LNDCL'].forEach(k => {
+  ['WS','DCL','MS','DS','UDC','UC','RIU','VS','OC','DE','LNWS','LNDCL'].forEach(k => {
     deps[k] = getDepartures(k, now);
   });
 
-  /* UC / IU mutual exclusion */
-  const nextIU = deps.IU.find(m => m >= nowMin) ?? null;
-  const nextUC = deps.UC.find(m => m >= nowMin) ?? null;
-  const showIU = nextIU !== null;
-  const showUC = !showIU || (nextUC !== null && nextUC < nextIU);
-  document.getElementById('card-IU').classList.toggle('hidden', !showIU);
-  document.getElementById('card-UC').classList.toggle('hidden', !showUC);
+  /* Summer: RIU always shown (replaces IU); UC always shown (no overlap) */
+  document.getElementById('card-RIU').classList.remove('hidden');
+  document.getElementById('card-UC').classList.remove('hidden');
 
-  /* UDC → DE on Fri evening & all Sat; hide both on Sun */
-  const isSunday   = jsDay === 0;
-  const isSaturday = jsDay === 6;
-  const showDE  = !isSunday && (isSaturday || (jsDay === 5 && nowMin >= 21 * 60));
-  const showUDC = !isSunday && !isSaturday && !(jsDay === 5 && nowMin >= 21 * 60);
-  document.getElementById('card-UDC').classList.toggle('hidden', !showUDC);
-  document.getElementById('card-DE').classList.toggle('hidden', !showDE);
+  /* Summer: UDC Express and DE not in service — keep hidden */
+  document.getElementById('card-UDC').classList.add('hidden');
+  document.getElementById('card-DE').classList.add('hidden');
 
-  /* Late Nite WS / DCL — replace regular WS & DCL cards when:
-     • actively in LN window (Sat/Sun before 4 AM) — always show LN, OR
-     • Fri/Sat night after 9 PM and regular service has ended for the night */
+  /* Summer: WS and DCL always shown — no Late Nite service
+   * (Fall restore: uncomment block below and remove the two lines above it)
+  const isSaturday   = jsDay === 6;
+  const isSunday     = jsDay === 0;
   const lnActiveNow  = (isSaturday || isSunday) && nowMin < 4 * 60;
-  const lnPreMidnite = (jsDay === 5 && nowMin >= 21 * 60)
-                     || (isSaturday && nowMin >= 21 * 60);
+  const lnPreMidnite = (jsDay === 5 && nowMin >= 21*60) || (isSaturday && nowMin >= 21*60);
   const noMoreDCL    = deps.DCL.filter(m => m >= nowMin).length === 0;
   const noMoreWS     = deps.WS.filter(m => m >= nowMin).length === 0;
   const showLNDCL    = lnActiveNow || (lnPreMidnite && noMoreDCL);
@@ -921,8 +890,11 @@ function refresh() {
   document.getElementById('card-DCL').classList.toggle('hidden', showLNDCL);
   document.getElementById('card-LNDCL').classList.toggle('hidden', !showLNDCL);
   document.getElementById('lnBar').classList.toggle('on', lnActiveNow);
+  */
+  document.getElementById('card-WS').classList.remove('hidden');
+  document.getElementById('card-DCL').classList.remove('hidden');
 
-  ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','DE','LNWS','LNDCL'].forEach(k => {
+  ['WS','DCL','MS','DS','UDC','UC','RIU','VS','OC','DE','LNWS','LNDCL'].forEach(k => {
     updateCard(k, nowMin, deps[k]);
   });
 }

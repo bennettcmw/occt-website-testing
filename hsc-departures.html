@@ -330,6 +330,17 @@ body {
   100% { left: -100%; }
 }
 
+/* ── SUMMER: NO WEEKEND SERVICE BAR ── */
+.no-wkn-bar {
+  flex-shrink: 0;
+  background: rgba(12,35,64,0.95);
+  border-bottom: 1px solid rgba(38,132,212,0.45);
+  padding: 0.7vh 2.2vw;
+  display: none;
+}
+.no-wkn-bar .mod-bar-inner { color: #93c5fd; display: flex; align-items: center; gap: 0.8vw; font-size: 1.3vh; }
+.no-wkn-bar .mod-bar-inner svg { flex-shrink: 0; width: 1.7vh; height: 1.7vh; }
+
 /* ── DISCLAIMER ── */
 .disclaimer {
   flex-shrink: 0;
@@ -361,6 +372,16 @@ body {
     </div>
     <div class="auto-label" id="autoLabel">Auto-detected</div>
     <div class="legend-hint"><span class="legend-swatch"></span> Scheduled within 5 min</div>
+  </div>
+</div>
+
+<!-- SUMMER: NO WEEKEND SERVICE -->
+<div class="no-wkn-bar" id="noWknBar">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+    </svg>
+    <span>No OCCT service operates on summer weekends. Please use BC Transit for weekend transportation.</span>
   </div>
 </div>
 
@@ -472,24 +493,19 @@ const MODIFIED = {
  * Outbound: MS departs Union, arrives Pharmacy School en route to UDC.
  * Inbound:  MS departs UDC, arrives Pharmacy School en route back to BU.
  * ===================================================================== */
+/* ── SUMMER 2026 SCHEDULES ── Arrivals at the Pharmacy School stop.
+ * Fall semester: restore weekend arrays and original weekday times.
+ * =========================================================================== */
 const SCHEDULES = {
-  /* MS Outbound — Pharmacy School arrival times */
+  /* MS Outbound — arrives Pharmacy School en route Union → UDC */
   MSOUT: {
-    weekday: [
-      "07:39","08:44","09:39","10:34","11:44","12:34","13:24","14:24",
-      "15:44","16:39","17:49","18:49","19:49","20:49",
-      {t:"21:49",d:[1,2,3,4]}
-    ],
-    weekend: ["10:49","12:49","15:09","17:24","20:09"]
+    weekday: ["08:09","09:54","12:59","15:24","17:44"],
+    weekend: []
   },
-  /* MS Inbound — Pharmacy School arrival times */
+  /* MS Inbound — arrives Pharmacy School en route UDC → BU */
   MSIN: {
-    weekday: [
-      "07:22","08:22","09:22","10:07","10:42","11:22","12:12","13:12",
-      "14:12","15:17","16:32","18:02","19:12","20:07","21:12",
-      {t:"21:52",d:[1,2,3,4]}
-    ],
-    weekend: ["10:32","12:27","14:42","16:17","19:02","20:47","21:47"]
+    weekday: ["10:17","12:32","14:57","18:42","20:22"],
+    weekend: []
   }
 };
 
@@ -598,6 +614,9 @@ function refresh() {
   } else {
     modBar.classList.remove('on');
   }
+
+  /* Summer: show no-weekend banner when weekend mode is active */
+  document.getElementById('noWknBar').style.display = (dayMode === 'weekend') ? 'block' : 'none';
 
   const deps = {};
   ['MSOUT','MSIN'].forEach(k => {

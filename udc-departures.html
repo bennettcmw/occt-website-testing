@@ -329,6 +329,16 @@ body {
   100% { left: -100%; }
 }
 
+/* ── SUMMER: NO WEEKEND SERVICE BAR ── */
+.no-wkn-bar {
+  flex-shrink: 0;
+  background: rgba(12,35,64,0.95);
+  border-bottom: 1px solid rgba(38,132,212,0.45);
+  padding: 0.7vh 2.2vw;
+  display: none;
+}
+.no-wkn-bar .mod-bar-inner { color: #93c5fd; }
+
 /* ── DISCLAIMER ── */
 .disclaimer {
   flex-shrink: 0;
@@ -360,6 +370,16 @@ body {
     </div>
     <div class="auto-label" id="autoLabel">Auto-detected</div>
     <div class="legend-hint"><span class="legend-swatch"></span> Scheduled within 5 min</div>
+  </div>
+</div>
+
+<!-- SUMMER: NO WEEKEND SERVICE -->
+<div class="no-wkn-bar" id="noWknBar">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+    </svg>
+    <span>No OCCT service operates on summer weekends. Please use BC Transit for weekend transportation.</span>
   </div>
 </div>
 
@@ -505,64 +525,27 @@ const MODIFIED = {
  * MS & WS depart from UDC; DCL departs from State & Hawley Sts;
  * DS departs from Visions Arena (across the street from UDC).
  * ===================================================================== */
+/* ── SUMMER 2026 SCHEDULES ── All times 24h "HH:MM", weekdays only.
+ * Fall semester: restore weekend arrays and original weekday times.
+ * =========================================================================== */
 const SCHEDULES = {
   MS: {
-    weekday: [
-      "07:10","08:10","09:10","09:55","10:30","11:10","12:00",
-      "13:00","14:00","15:05","16:20","17:50","19:00","19:55","21:00",
-      {t:"21:40",d:[1,2,3,4]}
-    ],
-    weekend: ["10:20","12:15","14:30","16:05","18:50","20:35","21:35"]
+    weekday: ["10:05","12:20","14:45","18:30","20:10"],
+    weekend: []
   },
   WS: {
-    weekday: [
-      "07:15","07:45","08:05","08:35","08:55","09:25","10:15","10:40",
-      "11:05","11:25","11:40","12:15","12:50","13:40","14:30","15:23",
-      "15:58","16:38","18:03","18:40","19:00","19:30","20:00","20:45",
-      "21:15","21:48","22:13",
-      {t:"23:08",d:[1,2,3,4]},{t:"23:20",d:[5]},
-      "00:03"
-    ],
-    weekend: [
-      "09:05","09:50","11:05","13:05","14:05","15:15","16:45","18:00",
-      "19:30","20:50","22:05","22:15","22:48",
-      {t:"23:20",d:[6]},{t:"23:28",d:[0]},
-      "00:05"
-    ]
+    weekday: ["07:50","09:15","11:00","12:30","14:05","16:15","17:10","19:05"],
+    weekend: []
   },
   DCL: {
-    weekday: [
-      "07:20","07:35","07:55","08:20","08:45","09:15","09:40","09:50",
-      "10:20","10:30","11:10","11:40","12:10","12:35","13:05","13:50",
-      "14:35","15:12","15:37","16:15","17:15","17:55","18:15","18:45",
-      "19:35","19:50","20:10","20:40","21:00","21:35","22:05",
-      {t:"23:00",d:[5]},{t:"23:10",d:[1,2,3,4]},
-      "00:05"
-    ],
-    weekend: [
-      "09:40","10:25","11:40","12:25","13:50","14:55","16:05","16:55",
-      "18:50","19:40","21:25","21:40",
-      {t:"22:20",d:[0]},
-      "22:55","00:05"
-    ]
+    weekday: ["08:40","09:25","11:00","11:50","14:00","15:35","17:05","20:05"],
+    weekend: []
   },
   DS: {
-    weekday: [
-      "07:55","08:35","09:05","10:00","10:55","12:05","12:55","13:45",
-      "14:45","16:08","17:05","18:10","19:10","20:10","21:10",
-      {t:"22:10",d:[1,2,3,4]}
-    ],
-    weekend: ["11:05","13:05","15:25","17:40","20:25"]
-  },
-  UDC: {
-    weekday: [
-      "07:30","08:00","08:30","09:00","09:30","10:00","10:30","11:00",
-      "11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00",
-      "15:30","16:00","16:30","17:00","17:15","17:25","17:30","17:45",
-      "18:25","19:00","19:30","20:15"
-    ],
+    weekday: ["08:30","10:15","13:20","15:45","18:05"],
     weekend: []
-  }
+  },
+  UDC: { weekday: [], weekend: [] } /* UDC Express — not in summer service */
 };
 
 /* ===================================================================== */
@@ -676,8 +659,11 @@ function refresh() {
     deps[k] = getDepartures(k, now);
   });
 
-  const isWeekend = jsDay === 0 || jsDay === 6;
-  document.getElementById('card-UDC').classList.toggle('hidden', isWeekend);
+  /* Summer: show no-weekend banner when weekend mode is active */
+  document.getElementById('noWknBar').style.display = (dayMode === 'weekend') ? 'block' : 'none';
+
+  /* Summer: UDC Express not in service */
+  document.getElementById('card-UDC').classList.add('hidden');
 
   ['MS','WS','DCL','DS','UDC'].forEach(k => {
     updateCard(k, nowMin, deps[k]);

@@ -117,6 +117,13 @@ nav { background: var(--navy); position: sticky; top: 0; z-index: 100; }
 .btn-sb:last-child { margin-bottom: 0; }
 .btn-sb:hover { background: var(--blue-muted); }
 
+/* TERM LIST */
+.term-list { display: flex; flex-direction: column; gap: 0; }
+.term-item { padding: 11px 0; border-bottom: 1px solid var(--gray-100); }
+.term-item:last-child { border-bottom: none; padding-bottom: 0; }
+.term-item dt { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.term-item dd { font-size: 15px; color: var(--gray-600); line-height: 1.6; margin: 0; }
+
 /* INTRO */
 .card-intro { font-size: 15px; color: var(--gray-600); line-height: 1.7; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-100); }
 
@@ -232,6 +239,60 @@ footer { color: rgba(255,255,255,0.80) !important; }
 <main id="main-content" class="main">
   <div class="main-col">
 
+    <!-- Common Terms -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+        </div>
+        <h2>Common Terms</h2>
+      </div>
+      <div class="card-body">
+        <dl class="term-list">
+          <div class="term-item">
+            <dt>Campus Shuttle</dt>
+            <dd>Smaller, green bus used for the Campus Shuttle route and routes between semesters.</dd>
+          </div>
+          <div class="term-item">
+            <dt>UDC</dt>
+            <dd>Binghamton&rsquo;s University Downtown Center, located in Downtown Binghamton.</dd>
+          </div>
+          <div class="term-item">
+            <dt>ITC</dt>
+            <dd>Binghamton&rsquo;s Innovative Technologies Complex, located next to campus on Vestal Parkway.</dd>
+          </div>
+          <div class="term-item">
+            <dt>HSC</dt>
+            <dd>Binghamton&rsquo;s Health Sciences Campus, composed of the Pharmacy and Nursing schools in Johnson City.</dd>
+          </div>
+          <div class="term-item">
+            <dt>Outbound</dt>
+            <dd>Route leaves campus and goes to the UDC (Downtown).</dd>
+          </div>
+          <div class="term-item">
+            <dt>Inbound</dt>
+            <dd>Route leaves the UDC (Downtown) and goes to campus.</dd>
+          </div>
+          <div class="term-item">
+            <dt>Shuttle</dt>
+            <dd>Route starts and ends on campus.</dd>
+          </div>
+          <div class="term-item">
+            <dt>Late Nite / LN</dt>
+            <dd>OCCT&rsquo;s service that runs from 12:00 AM &ndash; 3:15 AM on Fridays and Saturdays.</dd>
+          </div>
+          <div class="term-item">
+            <dt>Terminus</dt>
+            <dd>Final stop along a route, or where the route changes to another route. This is often campus or the UDC.</dd>
+          </div>
+          <div class="term-item">
+            <dt>Master PDF</dt>
+            <dd>A PDF document containing every route&rsquo;s schedule for a certain semester or time period (e.g. breaks).</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
     <!-- How to Ride -->
     <div class="card">
       <div class="card-head">
@@ -341,6 +402,24 @@ footer { color: rgba(255,255,255,0.80) !important; }
           <li>Buses currently on campus will freeze in place, unload all passengers, and drivers will seek shelter.</li>
           <li>Buses en route to campus will continue until they reach campus property, then follow the same procedure.</li>
           <li>In extreme conditions where continuing is unsafe, drivers will pull over and unload passengers at the nearest building.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tips & Policies -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+        </div>
+        <h2>Tips &amp; Policies</h2>
+      </div>
+      <div class="card-body">
+        <ul class="tip-list">
+          <li>Don&rsquo;t know where your stop is? Check out our website&rsquo;s route pages for detailed photos &amp; map pins!</li>
+          <li>Make sure to only board the bus through the front door.</li>
+          <li><span>Looking to go where OCCT doesn&rsquo;t? Try <a href="https://ridebctransit.com" target="_blank" rel="noopener noreferrer" style="color:var(--blue);">BC Transit</a> for free! More info at ridebctransit.com.</span></li>
+          <li><span>Got any more questions? Feel free to ask your driver or <a href="contactus.html" style="color:var(--blue);">contact us</a>!</span></li>
         </ul>
       </div>
     </div>
