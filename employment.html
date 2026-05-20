@@ -206,10 +206,9 @@ html { scroll-behavior: smooth; }
       </div>
       <div class="card-body">
 
-        <!--Google Form-->
         <iframe name="hiddenConfirmEmploy" id="hiddenConfirmEmploy" style="display:none;" onload="if(submittedEmploy){window.location='employment.html?sent=1';}"></iframe>
-        <form action="https://docs.google.com/forms/u/2/d/e/1FAIpQLSfb1DJYWE1xVTTFCekM3oIFcNt9JgsLgerwWLY6luJoZx1TsA/formResponse" method="post" target="hiddenConfirmEmploy" onsubmit="return handleSubmitEmploy(this)">
-          <p class="form-note" style="margin-bottom:16px;">* is a required field. <strong>Submission of this form does not guarantee a response.</strong></p> 
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSfb1DJYWE1xVTTFCekM3oIFcNt9JgsLgerwWLY6luJoZx1TsA/formResponse" method="post" target="hiddenConfirmEmploy" onsubmit="return handleSubmitEmploy(this)">
+          <p class="form-note" style="margin-bottom:16px;">* is a required field. <strong>Submission of this form does not guarantee a response.</strong></p>
 
           <div class="form-row">
             <div class="form-group">
@@ -257,8 +256,18 @@ html { scroll-behavior: smooth; }
           </div>
 
           <div class="form-group">
-            <label for="entry_semesters">How many semesters do you have left at Binghamton (excluding Winter and Summer Sessions)?</label>
-            <input type="text" id="entry_semesters" name="entry.1602974776" placeholder="Enter number of semesters">
+            <label for="entry_semesters">* How many semesters do you have left at Binghamton (excluding Winter and Summer Sessions)?</label>
+            <select id="entry_semesters" name="entry.1602974776" required>
+              <option value="" selected disabled>Select&hellip;</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8+</option>
+            </select>
           </div>
 
           <div class="hp-field" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
@@ -354,6 +363,7 @@ html { scroll-behavior: smooth; }
 
 <script>
 var formLoadTime = Date.now();
+var submittedEmploy = false;
 
 function isSpam(form) {
   if (form.querySelector('[name="website"]').value) return true;
