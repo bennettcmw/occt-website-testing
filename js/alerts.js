@@ -1,5 +1,5 @@
 const ALERT = {
-  active: true,
+  active: false,
   text: 'This is a sample service message.',
   link: { href: 'news.html', label: 'Details' }
 };

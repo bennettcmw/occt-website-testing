@@ -6,11 +6,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="../css/shared.css">
-<style>:root { --route-color: #53ba53; }</style>
+<style>:root { --route-color: #AEE1AE; }</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICS &mdash; ITC-Campus Shuttle &mdash; OCC Transport</title>
 <link rel="icon" type="image/png" href="../img/OCCTransportLogo(1) (1).png">
 <style>
+.breadcrumb { font-size: 13px; color: rgba(12,35,64,0.65) !important; margin-bottom: 12px; }
+.breadcrumb a { color: #0C2340 !important; transition: color .12s; }
+.breadcrumb a:hover { color: #000 !important; }
+.route-badge-lg { font-size: 22px; font-weight: 700; color: #0C2340; background: rgba(12,35,64,0.12); border-radius: 8px; padding: 6px 14px; letter-spacing: 0.04em; flex-shrink: 0; }
+.page-header h1 { font-size: 36px; font-weight: 700; color: #0C2340; letter-spacing: -0.02em; line-height: 1.1; }
+.page-header p { font-size: 16px; color: rgba(12,35,64,0.75); margin-top: 10px; }
+
 .card-body { padding: 0 24px 24px; display: flex; flex-direction: column; gap: 20px; }
 
 /*stoplist*/
@@ -21,7 +28,7 @@
 .stop-row { display: flex; align-items: center; gap: 14px; padding: 11px 16px; border-bottom: 1px solid var(--gray-100); position: relative; }
 .stop-row:last-child { border-bottom: none; }
 .stop-row:hover { background: var(--blue-pale); }
-.stop-num { width: 24px; height: 24px; border-radius: 50%; background: var(--route-color); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.stop-num { width: 24px; height: 24px; border-radius: 50%; background: var(--route-color); color: #000; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .stop-info-wrap { flex: 1; min-width: 0; }
 .stop-name { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.3; }
 .stop-sub { font-size: 12px; color: var(--gray-400); margin-top: 1px; }
@@ -34,7 +41,7 @@
 /*schedule*/
 .schedule-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
 .sched-tab { font-family: var(--font); font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: var(--radius-sm); border: 1px solid var(--gray-200); background: var(--off-white); color: var(--gray-600); cursor: pointer; transition: all .12s; }
-.sched-tab.active { background: var(--route-color); border-color: var(--route-color); color: #fff; }
+.sched-tab.active { background: var(--route-color); border-color: var(--route-color); color: #000; }
 .sched-panel { display: none; }
 .sched-panel.active { display: block; }
 .sched-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-sm); border: 1px solid var(--gray-100); }
@@ -168,7 +175,7 @@
       <span class="route-badge-lg">ICS</span>
       <h1>ITC-Campus Shuttle</h1>
     </div>
-    <p>Seasonal shuttle connecting the Innovative Technologies Complex to residential communities &mdash; intersessions &amp; breaks only</p>
+    <p>Interim-week shuttle connecting Mohawk &mdash; ITC &mdash; Hillside. Summer 2026 service dates: 5/18&ndash;5/22, 6/30&ndash;7/3, 8/10&ndash;8/14</p>
   </div>
 </div>
 
@@ -186,10 +193,10 @@
 
       <div class="card-body">
         <div class="callout">
-          The ITC-Campus Shuttle is a <strong>seasonal Green Bus</strong> service running a continuous loop between Mohawk, the Innovative Technologies Complex, Hillside, and all stops in between. It operates <strong>weekdays only, 8:00 AM&ndash;6:00 PM</strong>, and only when campus is in a <strong>Summer Intersession, Winter Intersession, or academic break</strong> (Spring Break, Fall Break). It does not run during the regular semester.
+          The ITC-Campus Shuttle is a <strong>Green Bus</strong> service running a continuous loop from Mohawk through ITC, Hillside, and back. It operates <strong>weekdays only, 8:00 AM&ndash;6:00 PM</strong>, and only during <strong>summer interim weeks</strong> when regular OCCT service is paused. Summer 2026 interim dates: <strong>5/18&ndash;5/22, 6/30&ndash;7/3, and 8/10&ndash;8/14</strong>.
         </div>
         <div class="callout-warn">
-          <strong>Not sure if ICS is running today?</strong> Check <a href="../news.html" style="font-weight:700;text-decoration:underline;text-underline-offset:2px;">News &amp; Info</a> or confirm on the <a href="../routeschedule.html" style="font-weight:700;text-decoration:underline;text-underline-offset:2px;">Routes &amp; Schedules</a> page. During the regular semester this route is suspended and normal campus shuttle service applies.
+          <strong>Not sure if ICS is running today?</strong> Check <a href="../news.html" style="font-weight:700;text-decoration:underline;text-underline-offset:2px;">News &amp; Info</a> or the live <a href="../union-departures.html" style="font-weight:700;text-decoration:underline;text-underline-offset:2px;">University Union departure board</a>. ICS is the only shuttle operating during interim weeks &mdash; all other summer routes are paused.
         </div>
 
         <!-- Stops -->
@@ -287,14 +294,14 @@
         <div>
           <div style="font-size:13px; font-weight:600; color:var(--gray-400); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;">Schedule</div>
           <div class="schedule-tabs">
-            <button class="sched-tab active" onclick="showSched(this,'ics-wkd')">Mon &ndash; Fri</button>
-            <button class="sched-tab" onclick="showSched(this,'ics-brk')">Break / Reduced Schedule</button>
+            <button class="sched-tab active" onclick="showSched(this,'ics-wkd')">Mon &ndash; Fri (Interim Weeks)</button>
+            <button class="sched-tab" onclick="showSched(this,'ics-wkn')">Weekend</button>
           </div>
 
-          <!-- Weekday (Intersession) panel -->
+          <!-- Interim Weekday panel -->
           <div class="sched-panel active" id="ics-wkd">
             <div class="sched-info">
-              <strong>Summer &amp; Winter Intersession:</strong> Service operates as a <strong>continuous loop</strong> from <strong>8:00 AM to 6:00 PM, Monday&ndash;Friday</strong>. Departures run every 30 minutes from Mohawk. No weekend service.
+              <strong>Summer 2026 Interim Weeks:</strong> Service operates Mon&ndash;Fri from <strong>8:00 AM to 5:30 PM</strong> (last departure from Mohawk at 5:30 PM, arriving back at 5:48 PM). Departures every 30 minutes. Service dates: <strong>5/18&ndash;5/22, 6/30&ndash;7/3, 8/10&ndash;8/14</strong>.
             </div>
             <div class="sched-table-wrap">
               <table class="sched-table">
@@ -330,18 +337,12 @@
                 </tbody>
               </table>
             </div>
-            <p class="sched-note">* Times shown are approximate. All stops along the loop are served between the key timepoints above. No service on weekends or university holidays.</p>
+            <p class="sched-note">* Times shown are approximate. All stops along the loop are served between the key timepoints above. ICS only operates during the listed interim weeks &mdash; outside those dates, see the <a href="../routeschedule.html" style="font-weight:600;text-decoration:underline;text-underline-offset:2px;">Routes &amp; Schedules</a> page for active routes.</p>
           </div>
 
-          <!-- Break / Reduced Schedule panel -->
-          <div class="sched-panel" id="ics-brk">
-            <div class="sched-info">
-              <strong>Spring Break &amp; Fall Break:</strong> The ICS operates a <strong>reduced schedule</strong> during academic breaks. Check the downloadable schedule below or <a href="../news.html" style="color:#1e4d1e;font-weight:600;text-decoration:underline;text-underline-offset:2px;">News &amp; Info</a> for specific dates and times in effect.
-            </div>
-            <div class="callout">
-              Reduced-schedule dates and times vary each semester. Download the current break schedule PDF for full details, or visit <a href="../news.html" style="font-weight:700;text-decoration:underline;text-underline-offset:2px;">News &amp; Info</a> for the latest posting.
-            </div>
-            <p class="sched-note" style="margin-top:12px;">* During reduced-schedule periods, some trips may be eliminated or times adjusted. The standard intersession timetable above does not apply during academic breaks.</p>
+          <!-- Weekend panel -->
+          <div class="sched-panel" id="ics-wkn">
+            <p class="callout"><strong>No OCCT service on summer weekends.</strong> The ICS Shuttle does not operate Saturday or Sunday. For weekend transportation, please use <a href="https://www.gobroomecounty.com/transit/" target="_blank" rel="noopener noreferrer">BC Transit</a>.</p>
           </div>
 
         </div><!-- /schedule -->
@@ -362,10 +363,10 @@
       </div>
       <div class="sb-card-body" style="gap:8px; display:flex; flex-direction:column;">
         <div class="sb-notice sb-notice-warn">
-          <strong>Seasonal service only.</strong> ICS does <em>not</em> operate during the regular academic semester. Service runs during Summer &amp; Winter Intersessions and on a reduced schedule for Spring &amp; Fall Breaks.
+          <strong>Summer 2026 interim service.</strong> ICS only runs during these weekdays: <strong>5/18&ndash;5/22, 6/30&ndash;7/3, 8/10&ndash;8/14</strong>. It is the only OCCT route operating during these weeks.
         </div>
         <div class="sb-notice">
-          <strong>Weekdays only.</strong> No ICS service on Saturdays, Sundays, or university holidays.
+          <strong>Weekdays only.</strong> No ICS service on Saturdays or Sundays.
         </div>
         <div class="sb-notice">
           <strong>Green Buses only.</strong> This route is served exclusively by Green Shuttle buses, not Blue Buses.
@@ -380,8 +381,8 @@
         <h3>Download Schedule</h3>
       </div>
       <div class="sb-card-body">
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Interim Schedule</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Master Schedule</a>
       </div>
     </div>
 

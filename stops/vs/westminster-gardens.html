@@ -5,23 +5,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
-<link rel="stylesheet" href="../css/shared.css">
-<style>:root { --route-color: #191970; }</style>
+<link rel="stylesheet" href="../../css/shared.css">
+<style>:root { --route-color: #E37383; }</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>New York Avenue (Outbound) &mdash; WS Stop &mdash; OCC Transport</title>
+<title>Westminster Gardens &mdash; VS Stop &mdash; OCC Transport</title>
 <link rel="icon" type="image/png" href="../../img/OCCTransportLogo(1) (1).png">
 <style>
-/* STOP PHOTO */
 .stop-photo-wrap { width: 100%; aspect-ratio: 16/9; background: var(--gray-100); border-radius: var(--radius-sm); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--gray-200); }
-.stop-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .stop-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--gray-400); width: 100%; height: 100%; padding: 24px; text-align: center; }
 .stop-photo-placeholder svg { width: 48px; height: 48px; opacity: 0.5; }
 .stop-photo-placeholder p { font-size: 14px; color: var(--gray-400); }
 
-/* NOTES */
 .notes-empty { font-size: 14px; color: var(--gray-400); font-style: italic; }
 
-/* ROUTES SERVING */
 .routes-list { display: flex; flex-wrap: wrap; gap: 10px; }
 .route-chip { display: inline-flex; align-items: center; gap: 10px; background: var(--off-white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 16px; text-decoration: none; transition: border-color .12s, background .12s; }
 .route-chip:hover { border-color: var(--blue-muted); background: var(--blue-pale); }
@@ -29,16 +25,9 @@
 .route-chip-name { font-size: 15px; font-weight: 500; color: var(--navy); }
 .route-chip-dir { font-size: 12px; color: var(--gray-400); margin-left: 2px; }
 
-/* LOCATION */
 .location-info { display: flex; flex-direction: column; gap: 12px; }
-.location-address { font-size: 15px; color: var(--gray-600); line-height: 1.5; }
-.location-coords { font-size: 13px; color: var(--gray-400); font-family: monospace; }
-.map-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-.map-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 500; padding: 9px 16px; border-radius: var(--radius-sm); border: 1px solid var(--gray-200); background: var(--white); color: var(--navy); transition: all .12s; cursor: pointer; text-decoration: none; }
-.map-btn:hover { border-color: var(--blue-muted); background: var(--blue-pale); color: var(--blue); }
-.map-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.location-address { font-size: 15px; color: var(--gray-400); font-style: italic; }
 
-/* SIDEBAR */
 .sidebar { display: flex; flex-direction: column; gap: 16px; }
 .sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
 .sb-card-head { padding: 14px 18px; background: var(--navy); display: flex; align-items: center; gap: 10px; }
@@ -49,7 +38,6 @@
 .btn-sb { display: block; text-align: center; background: var(--blue-pale); color: var(--blue); font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: var(--radius-sm); border: 1px solid var(--blue-muted); transition: all .12s; }
 .btn-sb:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
   .main { grid-template-columns: 1fr; }
   .sidebar { order: -1; }
@@ -59,7 +47,6 @@
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- NAV -->
 <nav aria-label="Main navigation">
   <div class="nav-inner">
     <a class="nav-logo" href="../../index.html">
@@ -92,8 +79,6 @@
 
 <div class="alert-bar" role="region" aria-label="Service alert"></div>
 
-
-<!-- PAGE HEADER -->
 <div class="page-header" role="region" aria-label="Page header">
   <div class="page-header-inner">
     <div class="breadcrumb">
@@ -101,26 +86,23 @@
       <span>&rsaquo;</span>
       <a href="../../routeschedule.html">Routes &amp; Schedules</a>
       <span>&rsaquo;</span>
-      <a href="../../routes/ws.html">WS &mdash; Westside Shuttle</a>
+      <a href="../../routes/vs.html">VS &mdash; Vestal Shopping Shuttle</a>
       <span>&rsaquo;</span>
       Stops
     </div>
     <div class="page-header-title">
-      <span class="route-badge-lg">WS</span>
+      <span class="route-badge-lg" style="color:#fff">VS</span>
       <div>
-        <h1>New York Avenue</h1>
-        <p>Outbound stop &mdash; Westside Shuttle &bull; <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:rgba(255,255,255,0.22);color:#fff;padding:2px 9px;border-radius:4px;">Outbound</span></p>
+        <h1>Westminster Gardens</h1>
+        <p>Vestal Shopping Shuttle stop</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <main id="main-content" class="main">
-
   <div class="main-col">
 
-    <!-- Stop Photo -->
     <div class="card">
       <div class="card-head">
         <div class="card-head-icon">
@@ -132,19 +114,11 @@
       </div>
       <div class="card-body">
         <div class="stop-photo-wrap">
-          <!-- PLACEHOLDER: replace src with actual stop photo -->
-          <!-- <img src="../../img/stops/new-york-avenue.jpg" alt="New York Avenue stop"> -->
-          <div class="stop-photo-placeholder">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
-            </svg>
-            <p>Stop photo coming soon</p>
-          </div>
+          <img src="https://occtransport.s3.us-east-1.amazonaws.com/Stops/Westminster%20Gardens.jpg" alt="Stop photo" style="width:100%;height:100%;object-fit:cover;">
         </div>
       </div>
     </div>
 
-    <!-- Notes -->
     <div class="card">
       <div class="card-head">
         <div class="card-head-icon">
@@ -159,7 +133,6 @@
       </div>
     </div>
 
-    <!-- Routes Servicing This Stop -->
     <div class="card">
       <div class="card-head">
         <div class="card-head-icon">
@@ -171,16 +144,14 @@
       </div>
       <div class="card-body">
         <div class="routes-list">
-          <a href="../../routes/ws.html" class="route-chip">
-            <span class="route-chip-badge">WS</span>
-            <span class="route-chip-name">Westside Shuttle</span>
-            <span class="route-chip-dir">Outbound &rsaquo;</span>
+          <a href="../../routes/vs.html" class="route-chip">
+            <span class="route-chip-badge" style="background:#E37383;color:#fff">VS</span>
+            <span class="route-chip-name">Vestal Shopping Shuttle</span>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Location -->
     <div class="card">
       <div class="card-head">
         <div class="card-head-icon">
@@ -193,30 +164,13 @@
       </div>
       <div class="card-body">
         <div class="location-info">
-          <p class="location-address">338 Floral Ave, Johnson City, NY 13790</p>
-          <p class="location-coords">42.107058, &minus;75.963125</p>
-          <div class="map-links">
-            <a class="map-btn" href="https://maps.apple.com/?address=338+Floral+Ave,+Johnson+City,+NY+13790&ll=42.107058,-75.963125&q=New+York+Avenue+Stop" target="_blank" rel="noopener noreferrer">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-              </svg>
-              Apple Maps
-            </a>
-            <a class="map-btn" href="https://goo.gl/maps/sXbqsy5JnvWZDmZQ7" target="_blank" rel="noopener noreferrer">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/>
-              </svg>
-              Google Maps
-            </a>
-          </div>
+          <p class="location-address">Address and coordinates coming soon.</p>
         </div>
       </div>
     </div>
 
-  </div><!-- /main-col -->
+  </div>
 
-  <!-- SIDEBAR -->
   <div class="sidebar">
 
     <div class="sb-card">
@@ -225,8 +179,8 @@
         <h3>Full Route</h3>
       </div>
       <div class="sb-card-body">
-        <p>View the complete WS Westside Shuttle route, schedule, and all stops.</p>
-        <a href="../../routes/ws.html" class="btn-sb">WS &mdash; Westside Shuttle</a>
+        <p>View the complete VS Vestal Shopping Shuttle route, schedule, and all stops.</p>
+        <a href="../../routes/vs.html" class="btn-sb">VS &mdash; Vestal Shopping Shuttle</a>
       </div>
     </div>
 
@@ -236,8 +190,8 @@
         <h3>Download Schedule</h3>
       </div>
       <div class="sb-card-body">
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Master Schedule</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Interim Schedule</a>
       </div>
     </div>
 
@@ -263,11 +217,9 @@
       </div>
     </div>
 
-  </div><!-- /sidebar -->
-
+  </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
@@ -296,8 +248,7 @@
   </div>
 </footer>
 
-
-<script src="../js/shared.js"></script>
-<script src="../js/alerts.js"></script>
+<script src="../../js/shared.js"></script>
+<script src="../../js/alerts.js"></script>
 </body>
 </html>

@@ -37,10 +37,9 @@ html { scroll-behavior: smooth; }
 .tag-update  { background: #f0fdf4; color: #166534; }
 .tag-service { background: #fdf2f8; color: #9d174d; }
 .news-entry h3 { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 8px; line-height: 1.3; }
-.news-entry p { font-size: 16px; color: var(--gray-600); line-height: 1.7; }
-.news-entry a.read-more { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 500; color: var(--blue); margin-top: 10px; }
-.news-entry a.read-more svg { width: 13px; height: 13px; }
-.news-entry a.read-more:hover { color: var(--navy); }
+.news-entry p { font-size: 16px; color: var(--gray-600); line-height: 1.7; margin-bottom: 6px; }
+.news-entry p:last-child { margin-bottom: 0; }
+.run-list { margin: 8px 0 10px 24px; line-height: 1.9; color: var(--gray-600); font-size: 15px; }
 
 /* SCHEDULE LINKS */
 .doc-list { display: flex; flex-direction: column; gap: 10px; }
@@ -164,26 +163,44 @@ html { scroll-behavior: smooth; }
 
         <div class="news-entry">
           <div class="news-meta">
-            <span class="news-tag tag-alert">Service Alert</span>
-            <span class="news-date">January 1, 2026</span>
+            <span class="news-tag tag-schedule">Schedule Change</span>
+            <span class="news-date">May 11, 2026</span>
           </div>
-          <h3>Sample Current Alert</h3>
-          <p>This is a sample service alert entry. Replace with actual alert information when available.</p>
+          <h3>End of Spring Semester Service &amp; Summer Session Schedule</h3>
+          <p>As the Spring 2026 semester comes to an end, OCCT will officially end its Spring 2026 Full Master Schedule service on the early afternoon of Friday, 5/15. The final runs for each route will be as follows:</p>
+          <ul class="run-list">
+            <li>11:35 DS OUT</li>
+            <li>11:55 DCL OUT</li>
+            <li>12:00 VS</li>
+            <li>12:00 MS IN</li>
+            <li>12:15 WS IN</li>
+            <li>12:15 UDC OUT</li>
+            <li>12:25 MS OUT</li>
+            <li>12:30 UDC IN</li>
+            <li>12:40 WS OUT</li>
+            <li>12:55 DS IN</li>
+            <li>1:00 IU</li>
+            <li>1:05 DCL IN</li>
+            <li>2:40 CS (Last Loop)</li>
+          </ul>
+          <p>The Summer 2026 ICS Master Schedule will run a combined service on the Green Campus Shuttle every 30 minutes from Mohawk from 8:00 A.M. to 5:30 P.M., Monday, 5/18, through Friday, 5/22.</p>
+          <p>The Summer 2026 Full Master Schedule will begin on Monday, 5/25.</p>
+          <p>Thank you for an amazing semester, Bearcats, and congratulations to those who are graduating! We look forward to seeing everyone else back in the Fall. Have a great summer!</p>
         </div>
 
         <div class="news-entry">
           <div class="news-meta">
-            <span class="news-tag tag-schedule">Schedule Change</span>
-            <span class="news-date">January 1, 2026</span>
+            <span class="news-tag tag-alert">Service Alert</span>
+            <span class="news-date">April 16, 2026</span>
           </div>
-          <h3>Sample Schedule Change</h3>
-          <p>This is a sample schedule change entry. Replace with actual schedule information when available.</p>
+          <h3>Westside and Main Street Inbound Detour</h3>
+          <p>Due to the ongoing city construction by the Main &amp; Front St intersection, the WS and MS Inbound will not be able to service the Court &amp; Hawley stop, as well as the Main &amp; Front St stop until further notice. Instead, the WS and MS Inbound will detour through Riverside Dr, Front St, Leroy St, and Oak St, before returning to the regular route. The WS and MS Outbound will remain unaffected.</p>
         </div>
 
       </div>
     </div>
 
-    <!-- Recent Announcements -->
+    <!-- Announcements -->
     <div class="card">
       <div class="card-head">
         <div class="card-head-icon">
@@ -195,54 +212,483 @@ html { scroll-behavior: smooth; }
 
         <div class="news-entry">
           <div class="news-meta">
-            <span class="news-tag tag-update">Update</span>
-            <span class="news-date">January 1, 2026</span>
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">March 24, 2026</span>
           </div>
-          <h3>Sample Announcement</h3>
-          <p>This is a sample announcement entry. Replace with actual announcement information when available.</p>
+          <h3>Spring Break Modified Service Update (3/27&ndash;4/6)</h3>
+          <p>In observance of Spring Break, OCC Transport will be ending its regular service early on Friday night, 3/27. The final runs for each route will be as follows:</p>
+          <ul class="run-list">
+            <li>8:00 UDC OUT</li>
+            <li>8:15 UDC IN</li>
+            <li>8:25 OC</li>
+            <li>8:40 MS OUT</li>
+            <li>9:00 VS</li>
+            <li>9:10 DS IN</li>
+            <li>9:20 DS OUT</li>
+            <li>9:30 IU</li>
+            <li>9:40 MS IN</li>
+            <li>10:10 UC</li>
+            <li>10:30 CS</li>
+            <li>10:35 WS OUT</li>
+            <li>11:00 DCL IN</li>
+            <li>11:00 DCL OUT</li>
+            <li>11:20 WS IN</li>
+          </ul>
+          <p>There will be no service for both this and next Saturday (3/28 &amp; 4/4) &amp; Sunday (3/29 &amp; 4/5), including Late Nite.</p>
+          <p>The ITC-CS (ICS) shuttle will operate every 30 minutes in a Green Campus Shuttle from Mohawk between 8:00 AM and 5:30 PM on Monday, 3/30, to Friday, 4/3 &amp; Monday, 4/6, following the Spring Break 2026 ICS Master Schedule. Regular service will resume on Tuesday, 4/7, in accordance with the Spring 2026 Full Master Schedule.</p>
+          <p>Enjoy the break, Bearcats!</p>
         </div>
 
         <div class="news-entry">
           <div class="news-meta">
-            <span class="news-tag tag-service">Heads Up</span>
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">March 4, 2026</span>
           </div>
-          <h3>Sample Heads Up</h3>
-          <p>This is a sample heads-up entry. Replace with actual information when available.</p>
+          <h3>Saturday (3/7, 3/14, &amp; 3/21) Modified Service</h3>
+          <p>On Saturday, 3/7, 3/14, &amp; 3/21, OCC Transport will be operating the Alternate Saturday Master Schedule. There will be direct UDC shuttles from the main campus to UDC and back throughout the whole day. In addition, several routes will run at adjusted times, differing from the standard Saturday schedule, so please plan accordingly.</p>
         </div>
 
-        <!-- ADD NEW ANNOUNCEMENTS ABOVE THIS LINE -->
-        <!-- Copy the news-entry block above and paste it here, updating the tag, date, title, and body text. -->
-
-      </div>
-    </div>
-
-    <!-- Schedule Documents -->
-    <div class="card">
-      <div class="card-head">
-        <div class="card-head-icon">
-          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">February 23, 2026</span>
+          </div>
+          <h3>Rejuvenation Day &amp; Weekend Modified Service (2/27&ndash;3/1)</h3>
+          <p>In observance of Rejuvenation Day on Friday, 2/27, OCCT will be operating on a modified schedule from 2/27 to 3/1. Please refer to the Spring 2026 Rejuvenation Day &amp; Weekend Master Schedule for the full list of runs and their times.</p>
+          <p>There will be no late nite on Friday, 2/27, or Saturday, 2/28. In addition, the Campus Shuttle will operate scheduled, non-continuous Blue Bus loops from Mohawk on Friday, 2/27, through Sunday, 3/1.</p>
+          <p>ITC service will operate every 20 minutes on a Green Campus Shuttle from Mohawk between 8:00 AM and 5:40 PM on Friday, 2/27.</p>
+          <p>Regular service will return on Monday, 3/2, following the Spring 2026 Full Master Schedule. Enjoy the long weekend, Bearcats!</p>
         </div>
-        <h2>Schedule Documents</h2>
-      </div>
-      <div class="card-body">
-        <div class="doc-list">
-          <a href="#" class="doc-item">
-            <div class="doc-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
-            <div class="doc-info">
-              <div class="doc-name">Sample Schedule Document</div>
-              <div class="doc-detail">PDF &mdash; Sample detail text</div>
-            </div>
-            <div class="doc-arrow"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></div>
-          </a>
-          <a href="#" class="doc-item">
-            <div class="doc-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
-            <div class="doc-info">
-              <div class="doc-name">Sample Schedule Document 2</div>
-              <div class="doc-detail">PDF &mdash; Sample detail text</div>
-            </div>
-            <div class="doc-arrow"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></div>
-          </a>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-alert">Cancellation</span>
+            <span class="news-date">January 24, 2026</span>
+          </div>
+          <h3>Sunday &amp; Monday Service Canceled (1/25&ndash;1/26)</h3>
+          <p>Due to the inclement weather, OCCT will be canceling all service on Sunday, 1/25, and Monday, 1/26. Full service, including Late Nite, will remain fully operational for today, Saturday, 1/24.</p>
+          <p>Regular service will resume on Tuesday, 1/27, following the Spring 2026 Full Master Schedule. We apologize for the inconvenience. Stay safe and warm, Bearcats!</p>
         </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Semester Bulletin</span>
+            <span class="news-date">January 18, 2026</span>
+          </div>
+          <h3>Spring 2026 Semester Bulletin &amp; Schedule Release</h3>
+          <p>Welcome to the Spring 2026 Semester, Bearcats! OCC Transport is happy to be back running full service with some improvements and additions to service for you this semester.</p>
+          <p>OCCT is proud to introduce the expansion and improvement of its local bus routes, including the Vestal Shopping Shuttle (VS), Downtown Southside (DS), and Main Street (MS), designed to provide more convenient, accessible, and frequent service for our riders.</p>
+          <p>Formerly the River Ridge Town Square Mall Shuttle (RRT), the route was rebranded last semester as the Vestal Shopping Shuttle (VS), continuing to serve popular destinations such as Walmart and Target while adding new shopping options, including The Shoppes at Vestal. Now, the route has become more accessible with three additional stops along Vestal Avenue: (1) Rail Trail; (2) Willow Point; and (3) Westminster Gardens. The Rail Trail in Vestal is brand new spanning over 2 miles long, just opening last year! Willow Point and Westminster Gardens are living spaces which are now accessible via the VS. These additions provide riders with more shopping, recreational, and residential connectivity than ever before!</p>
+          <p>The Downtown Southside (DS) route has been greatly improved with more frequent and accessible service. The route has slightly changed; instead of passing through State Street, the DS will now go through Water and Hawley Streets, adding two stops: Henry &amp; Water Sts and Court &amp; Hawley Sts.</p>
+          <p>The Main Street (MS) route has been reconfigured to improve efficiency, now traveling through Downs Avenue and Glenwood Avenue before and after servicing the Gannett Building. This change provides a quicker, smoother ride, though the Floral, Matthews/Crary, and Crestmont stops will no longer be served. The Helen stop has been moved for both the MS and Westside (WS) routes. Now, the outbound stop for Helen is at the BC Transit sign between KFC and Citizens Bank; the inbound stop is at the electrical pole just before Advance Auto Parts.</p>
+          <p>OCCT is currently taking applications for our Spring 2 Training class! If you&rsquo;re 18 or older, have a U.S. driver&rsquo;s license for at least one year, with no active violations or points, apply to drive the iconic blue buses! Visit occtransport.org/pages/employment for more information.</p>
+          <p>As we get into the semester, please remember to scan your ID when boarding the bus, and follow all rules of riding the bus. We look forward to another semester of providing you with safe, courteous, and reliable transportation. Best of luck in the semester, and thank you for continuing to be what makes OCCT so great!</p>
+          <p>For more information regarding the changes noted, please visit occtransport.org, or visit occtransport.org/pages/contactus to ask any questions.</p>
+          <p><em>&mdash; Andrew Monti, Public Relations Coordinator<br>pr@occtransport.org | 607-777-6916</em></p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Schedule Change</span>
+            <span class="news-date">December 8, 2025</span>
+          </div>
+          <h3>End of Fall Semester Service &amp; Winter Session Schedule</h3>
+          <p>As the Fall 2025 semester comes to an end, OCCT will end service early the evening of Friday, 12/12, following the Last Day of Service Master Schedule. After, there will be NO SERVICE until 12/15.</p>
+          <p>OCCT will operate the ITC/Campus Shuttle (ICS) from Monday, 12/15, to Tuesday, 12/23 &amp; Monday, 1/5, to Friday, 1/16. The ICS will be the ONLY bus in service for the winter session and will operate in a green shuttle starting from Mohawk between 8:00 AM and 5:30 PM on weekdays. Please refer to the Winter Session ICS Master Schedule for the full list &amp; details.</p>
+          <p>Thank you all for a wonderful semester, Bearcats! Take care, and enjoy the winter break &amp; holiday season! See you in the Spring!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">December 4, 2025</span>
+          </div>
+          <h3>Saturday (12/06) Modified Service</h3>
+          <p>On Saturday, 12/06, OCCT will be operating on an Alternate Master Schedule (12/06) for the day. There will be direct UDC shuttles from the main campus to UDC and back in the morning &amp; afternoon. In addition, several routes will run at adjusted times, differing from the standard Saturday schedule, so please plan accordingly.</p>
+          <p>Regular service will resume on Sunday, 12/07, following the Fall 2025 Full Master Schedule.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">November 20, 2025</span>
+          </div>
+          <h3>Thanksgiving Week Service Update (11/25&ndash;11/30)</h3>
+          <p>In observance of Thanksgiving, OCCT will be operating on a modified schedule for Tuesday, 11/25, &amp; Wednesday, 11/26. On Tuesday, service will end early at 10:45 PM, and on Wednesday, there will ONLY be ICS service from 8:00 AM to 12:00 PM. Please refer to the Thanksgiving Week Master Schedule (11/25 &amp; 11/26) for the full list of runs and their times.</p>
+          <p>There will be NO SERVICE from Thursday, 11/27, through Sunday, 11/30. Regular service will resume on Monday, 12/1, following the Fall 2025 Full Master Schedule.</p>
+          <p>Enjoy the holiday and break, Bearcats!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">November 20, 2025</span>
+          </div>
+          <h3>Saturday (11/22) Modified Service</h3>
+          <p>On Saturday, 11/22, OCCT will be operating on an Alternate Master Schedule (11/22) for the day. There will be direct UDC shuttles from the main campus to UDC and back in the morning &amp; afternoon. In addition, several routes will run at adjusted times, differing from the standard Saturday schedule, so please plan accordingly.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-alert">Cancellation</span>
+            <span class="news-date">November 1, 2025</span>
+          </div>
+          <h3>Saturday Late Nite Service Update</h3>
+          <p>Saturday, 11/1, a portion of late nite service has been canceled for tonight. The following scheduled runs will NOT be serviced:</p>
+          <ul class="run-list">
+            <li>12:00 DE</li>
+            <li>12:30 DE</li>
+            <li>1:00 LN DCL OUT</li>
+            <li>1:20 LN WS IN</li>
+            <li>1:45 DE</li>
+            <li>2:15 LN DCL OUT</li>
+            <li>2:35 LN WS IN</li>
+            <li>3:00 DE</li>
+            <li>3:30 CS</li>
+          </ul>
+          <p>All other scheduled late nite runs will operate as normal. We apologize for any inconvenience this may cause.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">October 22, 2025</span>
+          </div>
+          <h3>Rejuvenation Day &amp; Weekend Modified Service (10/24&ndash;10/26)</h3>
+          <p>In observance of Rejuvenation Day on Friday, 10/24, OCCT will be operating on a modified schedule from 10/24 to 10/26. Please refer to the Fall 2025 Rejuvenation Day &amp; Weekend Master Schedule for the full list of runs and their times.</p>
+          <p>There will be no late nite on Friday, 10/24, or Saturday, 10/25. In addition, the Campus Shuttle will be operating on scheduled, non-continuous loops in a Blue Bus from Mohawk on Friday, 10/24, to Sunday, 10/26.</p>
+          <p>ITC service will operate every twenty minutes in a Green Campus Shuttle from Mohawk between 8:00 AM and 5:40 PM on Friday, 10/24.</p>
+          <p>Regular service will return on Monday, 10/27, following the Fall 2025 Full Master Schedule. Enjoy the long weekend, Bearcats!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-alert">Cancellation</span>
+            <span class="news-date">October 18, 2025</span>
+          </div>
+          <h3>Saturday Late Nite Service Update</h3>
+          <p>Saturday, 10/18, a portion of late nite service has been canceled for tonight. The following scheduled runs will NOT be serviced:</p>
+          <ul class="run-list">
+            <li>12:00 LN DCL OUT</li>
+            <li>12:20 LN WS IN</li>
+            <li>12:45 LN WS OUT</li>
+            <li>1:10 LN DCL IN</li>
+            <li>1:30 LN DCL OUT</li>
+            <li>1:50 LN WS IN</li>
+            <li>2:15 DE</li>
+            <li>2:45 DE</li>
+            <li>3:15 DE</li>
+          </ul>
+          <p>All other scheduled late nite runs will operate as normal. We apologize for any inconvenience this may cause.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-alert">Cancellation</span>
+            <span class="news-date">October 17, 2025</span>
+          </div>
+          <h3>Friday Late Nite Canceled</h3>
+          <p>Friday, 10/17, late nite service has unfortunately been canceled. We apologize for any inconvenience this may cause. The final runs for this evening will be as follows:</p>
+          <ul class="run-list">
+            <li>9:30 MS OUT</li>
+            <li>10:15 DS OUT</li>
+            <li>11:00 WS OUT</li>
+            <li>11:15 DCL OUT</li>
+            <li>11:15 DE</li>
+            <li>11:30 UCLUB</li>
+            <li>11:45 CS (Blue Bus from Mohawk)</li>
+            <li>&mdash;</li>
+            <li>9:55 DS IN</li>
+            <li>10:35 MS IN</li>
+            <li>11:25 DCL IN</li>
+            <li>11:30 DE</li>
+            <li>11:35 WS IN</li>
+          </ul>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">September 28, 2025</span>
+          </div>
+          <h3>Fall 2025 Yom Kippur Service Update (10/1&ndash;10/2)</h3>
+          <p>In observance of Yom Kippur, OCCT will be ending service early on Wednesday night, 10/1, and will operate a modified schedule on Thursday, 10/2. Please refer to the Fall 2025 Yom Kippur Master Schedule for details. The final runs for Wednesday night will be as follows:</p>
+          <ul class="run-list">
+            <li>9:30 MS OUT</li>
+            <li>9:45 WS OUT</li>
+            <li>9:55 MS IN</li>
+            <li>10:10 DCL IN</li>
+            <li>10:15 DS OUT</li>
+            <li>10:20 DCL OUT</li>
+            <li>10:30 UCLUB</li>
+            <li>10:35 MS IN</li>
+            <li>10:40 WS IN</li>
+            <li>CS will end at 11:00</li>
+          </ul>
+          <p>ITC service will operate every twenty minutes in a Green Campus Shuttle from Mohawk between 8:00 AM and 5:40 PM on Thursday, 10/2.</p>
+          <p>Regular service will resume on Friday, 10/3. Enjoy the day, Bearcats!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-update">Route Change</span>
+            <span class="news-date">September 28, 2025</span>
+          </div>
+          <h3>Downtown Southside Route Change</h3>
+          <p>Effective Monday, 9/29, the Downtown Southside (DS) will no longer service Vestal Avenue and the stops along it (Larchmont, Hawthorne, Brookfield, Rush). Instead, the DS will utilize Vestal Pkwy before and after servicing Conklin Avenue. The rest of the route will remain unaffected &mdash; servicing Conklin Avenue, Tompkins St, and BC Junction. Please refer to the <a href="routes/ds.html">DS page</a> for the updated map &amp; info. In addition, due to the nature of the route change, the S. Washington stop for the DS Outbound has been moved to in front of the Indulgence Salon. We apologize for any inconvenience this may cause.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-update">Schedule Update</span>
+            <span class="news-date">September 14, 2025</span>
+          </div>
+          <h3>Fall 2025 Master Schedule Edits</h3>
+          <p>In efforts of continuous improvement, OCC Transport has made some adjustments to the Fall 2025 Master Schedule to increase the amount of inbounds to the main campus before 8:00 A.M.; therefore, certain outbound departure times have been changed. Please refer to the Fall 2025 Full Master Schedule for the updated times. We apologize for any inconvenience this may cause.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">September 14, 2025</span>
+          </div>
+          <h3>Modified Rosh Hashanah Service Update (9/19&ndash;9/24)</h3>
+          <p>In observance of Rosh Hashanah, OCC Transport will end its services early on Friday night, 9/19. The final runs will be:</p>
+          <ul class="run-list">
+            <li>9:00 VS</li>
+            <li>9:25 OC</li>
+            <li>9:30 IU</li>
+            <li>9:30 MS OUT</li>
+            <li>9:30 UDC OUT</li>
+            <li>9:45 UDC IN</li>
+            <li>9:55 DS IN</li>
+            <li>10:15 DS OUT</li>
+            <li>10:35 MS IN</li>
+            <li>11:00 WS OUT</li>
+            <li>11:15 DCL OUT</li>
+            <li>11:15 DE</li>
+            <li>11:25 DCL IN</li>
+            <li>11:30 UC</li>
+            <li>11:35 WS IN</li>
+            <li>11:45 CS</li>
+          </ul>
+          <p>In addition to no Late Nite on Friday, 9/19, OCCT will not be operating any of its services on Saturday, 9/20, or Sunday, 9/21. Service will resume but be reduced from Monday, 9/22, to Wednesday, 9/24, following the Fall 2025 Rosh Hashanah Break Master Schedule.</p>
+          <p>ICS service will operate every thirty minutes in a Green Campus Shuttle from Mohawk between 8:00 AM and 5:30 PM from Monday, 9/22, to Wednesday, 9/24.</p>
+          <p>Regular service will resume on Thursday, 9/25, following the Fall 2025 Full Master Schedule. Enjoy the holiday to those who observe; otherwise, enjoy the long break, Bearcats!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">August 24, 2025</span>
+          </div>
+          <h3>Modified Labor Day Weekend Service (8/29&ndash;9/1)</h3>
+          <p>In observance of Labor Day, OCCT will end service early on Friday, 8/29. The final runs will be:</p>
+          <ul class="run-list">
+            <li>9:00 VS</li>
+            <li>9:25 OC</li>
+            <li>9:30 IU</li>
+            <li>9:30 MS OUT</li>
+            <li>9:30 UDC OUT</li>
+            <li>9:45 UDC IN</li>
+            <li>9:55 DS IN</li>
+            <li>10:15 DS OUT</li>
+            <li>10:35 MS IN</li>
+            <li>11:00 WS OUT</li>
+            <li>11:15 DCL OUT</li>
+            <li>11:15 DE</li>
+            <li>11:25 DCL IN</li>
+            <li>11:30 UC</li>
+            <li>11:35 WS IN</li>
+            <li>11:45 CS</li>
+          </ul>
+          <p>There will be no Late Nite on Friday, 8/29, or Saturday, 8/30. In addition, service will be reduced throughout 8/30&ndash;9/1, following the Fall 2025 Labor Day Weekend (8/30&ndash;9/1) Master Schedule.</p>
+          <p>ITC service will operate every twenty minutes in a Green Campus Shuttle from Mohawk between 8:00 AM and 5:40 PM only on Monday, 9/1.</p>
+          <p>Regular service will resume on Tuesday, 9/2, following the Fall 2025 Full Master Schedule. Enjoy the long weekend!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Semester Bulletin</span>
+            <span class="news-date">August 8, 2025</span>
+          </div>
+          <h3>Fall 2025 Semester Schedules &amp; Service Bulletin</h3>
+          <p>Welcome to the Fall 2025 Semester, Bearcats! OCC Transport is excited to be back to full service, with some improvements and new additions to make your commute better this semester.</p>
+          <p>OCCT is proud to introduce its newly extended and improved routes: Vestal Shopping Shuttle (VS), Oakdale Commons Shuttle (OC), and Downtown Southside (DS) Inbound!</p>
+          <p>Formerly known as the Rivera Ridge Town Square Mall Shuttle (RRT), the RRT has been renamed the Vestal Shopping Shuttle (VS). It now follows the same route as before, including stops at favorites like Target and Walmart, but with an extended route. Additionally, The Shoppes at Vestal and Campus Plaza are now key destinations. The entire route takes 45 minutes, and ALL VS OUTBOUNDS DEPART FROM THE UNION, NOT RAFUSE.</p>
+          <p>The Oakdale Commons Shuttle (OC) has also been extended. After servicing the Oakdale Commons and Wegmans stops, it continues to stop at Aldi on Harry L Drive and at Five Below. The total trip takes about 35 minutes, with ALL OC OUTBOUNDS DEPARTING FROM THE UNION, NOT RAFUSE.</p>
+          <p>The demand for bus service in Binghamton&rsquo;s Southside neighborhood has grown significantly over the past few semesters; however, OCCT was unable to meet that demand earlier due to a labor shortage. When the Downtown Southside (DS) Outbound route was introduced last year, it only operated after 6 P.M. with four runs each night. Now, on weekdays, the DS Outbound starts at 7 A.M., and the newly DS Inbound begins at 8 A.M., totaling 31 DS runs each weekday!</p>
+          <p>As we begin the semester, please remember to scan your ID when boarding and follow all bus rules and regulations. Drivers will remind passengers to scan IDs over the first few weeks and may deny boarding if an ID cannot be presented.</p>
+          <p>OCCT is now accepting applications for our Fall 2 Training class! If you&rsquo;re 18 or older, have had a U.S. driver&rsquo;s license for at least a year, and have no active violations or points, apply to become a driver of our iconic blue buses! Visit occtransport.org/pages/employment for more details.</p>
+          <p>We look forward to providing you with another semester of safe, courteous, and reliable transportation. Best of luck this semester, and thank you for making OCCT great!</p>
+          <p><em>&mdash; Andrew Monti, Public Relations Coordinator<br>pr@occtransport.org | 607-777-6916</em></p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Schedule Change</span>
+            <span class="news-date">May 1, 2025</span>
+          </div>
+          <h3>End of Spring Semester Service</h3>
+          <p>As the semester comes to an end, OCCT will end Regular Service mid-day on Friday, 5/16. The final runs will be:</p>
+          <ul class="run-list">
+            <li>12:45 UDC OUT</li>
+            <li>12:50 MS OUT</li>
+            <li>1:00 IU</li>
+            <li>1:20 WS OUT</li>
+            <li>1:40 WS OUT</li>
+            <li>2:00 CS</li>
+          </ul>
+          <p>An ITC-Campus Shuttle only service will run a combined service from 8 a.m.&ndash; 5:30 p.m. Monday, May 19 through Friday, May 23, until Summer Service begins Tuesday, May 27. Please visit the Routes &amp; Schedules page for the Summer Master Schedule. Thank you for an amazing Semester, Bearcats! Congratulations to those who are graduating, and we look forward to seeing everyone else back in the Fall!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-update">Stop Change</span>
+            <span class="news-date">April 27, 2025</span>
+          </div>
+          <h3>Oakdale Commons Stop Change</h3>
+          <p>Given the adjustment in construction at the Oakdale Commons, OCCT will be servicing the mall in a different location. The stop has now moved to the front of the mall near Dave &amp; Buster&rsquo;s. For more information, please visit the Oakdale Commons stop page.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">April 17, 2025</span>
+          </div>
+          <h3>Modified Easter Weekend Service</h3>
+          <p>In observance of the Easter long weekend, OCCT will end service early on Friday, 4/18. The final runs will be:</p>
+          <ul class="run-list">
+            <li>9:00 UDC OUT</li>
+            <li>9:15 MS IN</li>
+            <li>10:30 MS OUT</li>
+            <li>10:30 DS OUT</li>
+            <li>11:00 WS OUT</li>
+            <li>11:00 UDC IN</li>
+            <li>11:15 DCL OUT</li>
+            <li>11:15 DE</li>
+            <li>11:25 DCL IN</li>
+            <li>11:30 WS IN</li>
+            <li>11:45 UC</li>
+            <li>12:00 CS</li>
+          </ul>
+          <p>There will be no Late Nite on Friday, 4/18, or Saturday, 4/19. Service will remain unaffected on Sunday, 4/20. Service on Monday, 4/21 will utilize a SUNDAY schedule instead of the standard Monday schedule. ITC service will operate every half hour in a Green Campus Shuttle from Mohawk between 8:30 AM and 9:00 PM. Regular service will resume on Tuesday, 4/22.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">March 4, 2025</span>
+          </div>
+          <h3>Spring Break Service &amp; Early Ending Friday, 3/7</h3>
+          <p>In observance of Spring Break, OCCT will end service early on Friday, 3/7. The final runs will be:</p>
+          <ul class="run-list">
+            <li>5:30 Oakdale Commons Shuttle (OC)</li>
+            <li>6:00 Riviera Ridge-Town Square Mall Shuttle (VS)</li>
+            <li>8:45 Main Street Outbound (MS)</li>
+            <li>9:20 Downtown Center-Leroy Outbound (DCL OUT)</li>
+            <li>9:30 Downtown Southside Outbound (DS OUT)</li>
+            <li>9:30 ITC-UClub Shuttle (IU)</li>
+            <li>10:10 Westside Outbound (WS OUT)</li>
+            <li>10:40 Campus Shuttle (CS)</li>
+          </ul>
+          <p>ITC-CS only service will operate from Monday, 3/10 to Friday, 3/14. There will not be any service 3/8, 3/9, 3/15, and 3/16. Regular service resumes on Monday, 3/17. We hope you have a restful Spring Break, Bearcats!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Semester Bulletin</span>
+            <span class="news-date">January 13, 2025</span>
+          </div>
+          <h3>Spring 2025 Semester Schedules &amp; Service Bulletin</h3>
+          <p>Welcome to the Spring 2025 Semester, Bearcats! We hope you had a restful winter break and an enjoyable holiday season. OCC Transport is happy to be back running with improvements and updates to service.</p>
+          <p>Our drive for recruitment has allowed us to replenish staffing levels enough to increase service hours by approximately 9.7% this semester! In particular, an additional 8 DCL Inbounds have been added on weekdays, and each downtown route has seen an increase in frequency throughout the week. The same routes operated last semester will continue this semester. The start of the DS Inbound operation has been postponed as we continue to research housing and ridership data in the Southside.</p>
+          <p>Certain peak inbound buses in the morning that are prone to getting full will also have additional &ldquo;chaser&rdquo; buses that will pick up remaining passengers on Main St. after Chestnut St. after the first bus gets full. Certain WS, DCL, MS, and UDC Inbounds will still be skipping Academic A to avoid traffic congestion around West Drive during class changes. Please review the schedules for each inbound route to see which specific runs will skip Academic A.</p>
+          <p>OCCT is currently taking applications for our Spring 2 Training class! If you&rsquo;re 18 or older, had a U.S. driver&rsquo;s license for at least one year, with no active violations or points, apply to drive the iconic blue buses! Visit occtransport.org/pages/employment for more information.</p>
+          <p><em>&mdash; Arjun Sahansra, Public Relations Coordinator<br>pr@occtransport.org | 607-777-6916</em></p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Schedule Change</span>
+            <span class="news-date">December 5, 2024</span>
+          </div>
+          <h3>Fall 2024 Semester Service Ending &amp; Winter Break Service</h3>
+          <p>As the Fall 2024 semester comes to an end, OCC Transport will be ending service early on Friday, December 13th. The final runs to leave campus that evening will be:</p>
+          <ul class="run-list">
+            <li>5:45 Main Street Outbound (MS OUT)</li>
+            <li>6:00 Downtown Southside Outbound (DS OUT)</li>
+            <li>6:45 UClub Shuttle (UC)</li>
+            <li>6:45 Westside Outbound (WS OUT)</li>
+            <li>6:45 Downtown Center-Leroy Outbound (DCL OUT)</li>
+            <li>7:00 Campus Shuttle (CS)</li>
+          </ul>
+          <p>Winter ITC-Campus Shuttle service will begin on Monday, 12/16, and continue through the Winter Session. Exact service dates &amp; schedules will release shortly. We&rsquo;d like to thank everyone for a great semester &mdash; we appreciate you and look forward to a great upcoming Spring! Enjoy your Winter Break &amp; Happy Holidays, Bearcats!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Modified Service</span>
+            <span class="news-date">November 13, 2024</span>
+          </div>
+          <h3>Thanksgiving Break Service Information</h3>
+          <p>In observance of Thanksgiving Break, OCCT will be reducing service from Wednesday, 11/27 to Sunday, 12/1. A modified reduced schedule that ends before 12:00 PM will be in effect on Wednesday, 11/27. There will be no service from Thursday, 11/28 to Sunday, 12/1. Normal service will resume on Monday, 12/2.</p>
+          <p>We hope you have a restful and enjoyable Thanksgiving Break!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-update">Update</span>
+            <span class="news-date">October 30, 2024</span>
+          </div>
+          <h3>Main St (MS) Detour Ending</h3>
+          <p>As a result of the Lester Ave. bridge being open to traffic again, the Gannett Building will be serviced directly through Lester Ave. on the Main St (MS) Outbound &amp; Inbound.</p>
+          <p>We hope this alleviates any delays or issues caused by the modified routing from the start of the semester. We appreciate your patience and understanding as we previously worked through this detour!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-update">Service Update</span>
+            <span class="news-date">September 4, 2024</span>
+          </div>
+          <h3>Academic A Service Changes</h3>
+          <p>Due to increased traffic during class change times, certain WS, DCL, MS &amp; UDC Inbound runs will begin skipping Academic A upon entering campus by servicing the Union via East Drive instead of West Drive. Avoiding this pedestrian &amp; vehicle traffic near Lecture Hall &amp; Academic A at these peak times will ensure that we continue to operate as close to on-time as possible and get passengers to/from class safely.</p>
+          <p>Information on the specific runs that will skip Academic A will be posted shortly. We apologize for any inconvenience and appreciate your understanding and patience as we get into the groove of another great semester!</p>
+          <p>For more information regarding this change, please contact pr@occtransport.org.</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-update">New Stop</span>
+            <span class="news-date">August 20, 2024</span>
+          </div>
+          <h3>Main St (MS) Service to Gannett Building &amp; JC Walmart</h3>
+          <p>Effective this semester, Main St (MS) Outbound &amp; Inbounds will begin to service the BU Gannett Building &amp; Walmart in North Johnson City. During the Lester Ave. bridge closure, buses will detour via Arch St. &amp; Brocton St. to service this area instead. We appreciate your patience as we work through this detour and service this new area!</p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-schedule">Semester Bulletin</span>
+            <span class="news-date">August 5, 2024</span>
+          </div>
+          <h3>Fall 2024 Semester Schedules &amp; Service Bulletin</h3>
+          <p>Welcome to the Fall 2024 Semester, Bearcats! OCC Transport is happy to be back running full service with some improvements and additions to service for you this semester.</p>
+          <p>OCCT is proud to introduce a new route, the Downtown Southside (DS)! This route provides service between Main Campus and the UDC via Southside neighborhoods and Downtown Binghamton. This semester, it will only run in the Outbound direction (Campus to UDC) in the evening hours when BC Transit stops operating the 5. As we increase staffing levels and review passenger demand, a mirrored Inbound run will begin operating in the following semesters. Visit occtransport.org/pages/ds for more information!</p>
+          <p>Since the release of the Downtown Southside, we will no longer be operating the Leroy Southside (LRS). Being the oldest route in our roster, operating since the early 1990s, this route&rsquo;s service area is currently covered by other routes throughout our service hours and therefore defunct.</p>
+          <p>Since our staffing levels have decreased from the previous year, we have slightly reduced service and will operate one less bus daily. This amounts to roughly a 9.5% decrease in service. As a result, we have shifted more residential runs (WS, DCL) to direct UDC service to ensure the same or more frequent service to/from the UDC as in previous semesters. We hope to return service frequency to previous numbers in the following semesters as we replenish our staffing levels in upcoming training classes.</p>
+          <p>OCCT is currently taking applications for our Fall 2 Training class! If you&rsquo;re 18 or older, had a U.S. driver&rsquo;s license for at least one year, with no active violations or points, apply to drive the iconic blue buses! Visit occtransport.org/pages/employment for more information.</p>
+          <p><em>&mdash; Arjun Sahansra, Public Relations Coordinator<br>pr@occtransport.org | 607-777-6916</em></p>
+        </div>
+
+        <div class="news-entry">
+          <div class="news-meta">
+            <span class="news-tag tag-update">New Route</span>
+            <span class="news-date">August 4, 2024</span>
+          </div>
+          <h3>Introducing Our New Route: The Downtown Southside</h3>
+          <p>OCCT is proud to announce our new route, the Downtown Southside (DS)! This route services Vestal Ave, Conklin Ave, and Tompkins St in Southside Binghamton, then Henry St, BC Junction, and the University Downtown Center in Downtown Binghamton. Designed to replace the Leroy Southside (LRS), this route will begin operating in the Fall 2024 only in the outbound direction. Check out our Facebook, Instagram, or <a href="routes/ds.html">Route Webpage</a> for more information!</p>
+        </div>
+
       </div>
     </div>
 
@@ -253,16 +699,43 @@ html { scroll-behavior: smooth; }
 
     <div class="sb-card">
       <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        <h3>Schedule Documents</h3>
+      </div>
+      <div class="sb-card-body">
+        <div class="doc-list">
+          <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">
+            <div class="doc-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
+            <div class="doc-info">
+              <div class="doc-name">Summer 2026 Master Schedule</div>
+              <div class="doc-detail">5/25/26 &ndash; 8/7/26 &middot; PDF</div>
+            </div>
+            <div class="doc-arrow"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></div>
+          </a>
+          <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">
+            <div class="doc-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
+            <div class="doc-info">
+              <div class="doc-name">Summer 2026 ICS Schedule</div>
+              <div class="doc-detail">Interim weeks only &middot; PDF</div>
+            </div>
+            <div class="doc-arrow"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
         <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5"/></svg>
         <h3>Route Notices</h3>
       </div>
       <div class="sb-card-body">
         <div class="status-tags">
-          <span class="stag stag-detour"><span class="stag-dot"></span> Sample Detour</span>
+          <span class="stag stag-detour"><span class="stag-dot"></span> Detour</span>
         </div>
         <div class="sched-sb-item">
-          <strong>Sample Route &mdash; Direction</strong>
-          This is a sample route notice. Replace with actual detour information when available.
+          <strong>WS &amp; MS Inbound &mdash; Ongoing Detour</strong>
+          Court &amp; Hawley and Main &amp; Front St stops not serviced. Buses detour via Riverside Dr, Front St, Leroy St, and Oak St. Effective 4/16. Outbound unaffected.
         </div>
       </div>
     </div>

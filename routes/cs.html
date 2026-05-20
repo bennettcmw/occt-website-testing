@@ -58,6 +58,11 @@
 .callout-warn { background: #fff0f0; border: 1px solid #e08080; border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: #6b1a1a; line-height: 1.6; }
 .callout-warn strong { font-weight: 600; }
 
+/*operatingtimes*/ .op-times { display: flex; flex-direction: column; gap: 10px; }
+.op-row { display: flex; flex-direction: column; gap: 2px; padding: 11px 14px; background: var(--off-white); border-radius: var(--radius-sm); border: 1px solid var(--gray-100); }
+.op-row-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); }
+.op-row-time { font-size: 15px; font-weight: 600; color: var(--navy); }
+
 /* ── SIDEBAR NOTICE ── */
 .sb-notice { background: #fff3cd; border: 1px solid rgba(232,160,0,0.45); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; color: #5c3a00; line-height: 1.6; margin-bottom: 10px; }
 .sb-notice.sb-notice-warn { background: #fff0f0; border-color: rgba(192,57,43,0.45); color: #6b1a1a; }
@@ -116,6 +121,8 @@
   .footer-inner { grid-template-columns: 1fr; gap: 22px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
+  .op-times { flex-direction: row; }
+  .op-row { flex: 1; }
 }
 @media (max-width: 620px) {
   .alert-bar { padding: 12px 16px; }
@@ -131,6 +138,8 @@
   .sidebar { order: 1; }
   .footer-links { grid-template-columns: 1fr 1fr; }
   .footer-inner { gap: 18px; }
+  .op-times { flex-direction: column; }
+  .op-row { flex: none; }
 }
 </style>
 </head>
@@ -204,13 +213,13 @@
       <!-- Loop selector tabs -->
       <div class="loop-tabs">
         <button class="loop-tab active" onclick="showLoop(this,'loop-outer')">Outer Loop</button>
-        <button class="loop-tab" onclick="showLoop(this,'loop-inner')">Inner Loop <span class="loop-wd-badge">Weekdays</span></button>
+        <button class="loop-tab" onclick="showLoop(this,'loop-inner')">Inner Loop <span class="loop-wd-badge">Suspended</span></button>
       </div>
 
       <!-- ── OUTER LOOP PANEL ── -->
       <div class="loop-panel active card-body" id="loop-outer">
         <div class="callout">
-          The Outer Loop runs as a <strong>continuous loop</strong>, serving all residential communities as well as the Engineering Building, Decker Health Services, the East and West Gyms, the Events Center, Clearview, and Academic A. On weekday evenings and weekends, service runs on a fixed schedule.
+          <strong>Summer 2026:</strong> The Campus Shuttle runs evenings only, Mon&ndash;Fri from <strong>6:30 PM to 8:30 PM</strong>. Buses depart from Engineering and Mohawk on a fixed schedule (see below). <strong>No daytime continuous-loop service</strong> &mdash; for daytime travel use the <strong><u><a href="riu.html">RIU Shuttle</a></u></strong>. No service on weekends.
         </div>
         <div class="callout-warn">
           <strong>Important:</strong> Buses departing from the <strong>Engineering Building do not serve Mohawk</strong>, and buses departing from <strong>Mohawk do not serve the Engineering Building</strong>. These are separate loops &mdash; board at the correct stop for your destination.
@@ -334,123 +343,56 @@
         <div>
           <div style="font-size:13px; font-weight:600; color:var(--gray-400); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;">Schedule</div>
           <div class="schedule-tabs">
-            <button class="sched-tab active" onclick="showSched(this,'cs-wkd')">Mon &ndash; Fri</button>
+            <button class="sched-tab active" onclick="showSched(this,'cs-wkd')">Mon &ndash; Fri Evenings</button>
             <button class="sched-tab" onclick="showSched(this,'cs-wkn')">Weekend</button>
-            <button class="sched-tab" onclick="showSched(this,'cs-ln')">Late Nite</button>
           </div>
 
-          <!-- Weekday panel -->
+          <!-- Summer evening schedule panel -->
           <div class="sched-panel active" id="cs-wkd">
             <div class="sched-info">
-              <strong>Daytime:</strong> The Outer Loop runs as a continuous loop from <strong>7:00 AM to 9:40 PM</strong> with no fixed timetable. Check ETA SPOT for real-time arrival estimates.
+              <strong>Summer 2026 Evening Service:</strong> Mon&ndash;Fri only, <strong>6:30 PM to 8:30 PM</strong>. Departures every 15 minutes from the Engineering Building. No daytime continuous-loop service in summer &mdash; use the <strong><u><a href="riu.html">RIU Shuttle</a></u></strong> for daytime travel.
             </div>
-            <div class="callout" style="margin-bottom:14px;">
-              <strong>After 9:40 PM:</strong> The continuous loop ends. All campus shuttle service operates as <strong>blue buses</strong> departing on scheduled, <strong>non-contiguous</strong> loops <strong>from Mohawk only</strong>. See the evening schedule below.
-            </div>
-            <div style="font-size:12px; font-weight:600; color:var(--gray-600); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">Evening Scheduled Loops</div>
             <div class="sched-table-wrap">
               <table class="sched-table">
                 <thead>
                   <tr>
-                    <th>Leaves Mohawk</th>
+                    <th>Leaves Engineering</th>
                     <th>Susquehanna</th>
                     <th>Hillside</th>
                     <th>Mountainview</th>
-                    <th>Hinman / Academic A</th>
+                    <th>Returns to Lower Campus</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>10:10 PM</td><td>10:14 PM</td><td>10:16 PM</td><td>10:18 PM</td><td>10:23 PM</td></tr>
-                  <tr><td>10:30 PM <span class="sched-day-tag">Fri</span></td><td>10:34 PM</td><td>10:36 PM</td><td>10:38 PM</td><td>10:43 PM</td></tr>
-                  <tr><td>10:35 PM <span class="sched-day-tag">Mon&ndash;Thu</span></td><td>10:39 PM</td><td>10:41 PM</td><td>10:43 PM</td><td>10:48 PM</td></tr>
-                  <tr><td>11:30 PM</td><td>11:34 PM</td><td>11:36 PM</td><td>11:38 PM</td><td>11:43 PM</td></tr>
+                  <tr><td>6:30 PM</td><td>6:36 PM</td><td>6:38 PM</td><td>6:40 PM</td><td>6:43 PM</td></tr>
+                  <tr><td>6:45 PM</td><td>6:51 PM</td><td>6:53 PM</td><td>6:55 PM</td><td>6:58 PM</td></tr>
+                  <tr><td>7:00 PM</td><td>7:06 PM</td><td>7:08 PM</td><td>7:10 PM</td><td>7:13 PM</td></tr>
+                  <tr><td>7:15 PM</td><td>7:21 PM</td><td>7:23 PM</td><td>7:25 PM</td><td>7:28 PM</td></tr>
+                  <tr><td>7:30 PM</td><td>7:36 PM</td><td>7:38 PM</td><td>7:40 PM</td><td>7:43 PM</td></tr>
+                  <tr><td>7:45 PM</td><td>7:51 PM</td><td>7:53 PM</td><td>7:55 PM</td><td>7:58 PM</td></tr>
+                  <tr><td>8:00 PM</td><td>8:06 PM</td><td>8:08 PM</td><td>8:10 PM</td><td>8:13 PM</td></tr>
+                  <tr><td>8:15 PM</td><td>8:21 PM</td><td>8:23 PM</td><td>8:25 PM</td><td>8:28 PM</td></tr>
+                  <tr><td>8:30 PM</td><td>8:36 PM</td><td>8:38 PM</td><td>8:40 PM</td><td>8:43 PM</td></tr>
                 </tbody>
               </table>
             </div>
-            <p class="sched-note">† Fri and Mon&ndash;Thu rows show the same departure slot adjusted by day of week.</p>
+            <p class="sched-note">Summer 2026 service &mdash; 5/25/26 to 8/7/26. No Late Nite service in summer. Late Nite returns in the fall semester.</p>
           </div>
 
           <!-- Weekend panel -->
           <div class="sched-panel" id="cs-wkn">
-            <div class="sched-info" style="margin-bottom:14px;">
-              <strong>Weekend service:</strong> All campus shuttles operate as <strong>blue buses</strong> on scheduled, <strong>non-contiguous</strong> loops. All trips depart <strong>from Mohawk</strong> &mdash; there is no continuous loop and no Engineering Building departures on weekends.
-            </div>
-            <div class="sched-table-wrap">
-              <table class="sched-table">
-                <thead>
-                  <tr>
-                    <th>Leaves Mohawk</th>
-                    <th>Susquehanna</th>
-                    <th>Hillside</th>
-                    <th>Mountainview</th>
-                    <th>Hinman / Academic A</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>8:45 AM</td><td>8:49 AM</td><td>8:51 AM</td><td>8:53 AM</td><td>8:58 AM</td></tr>
-                  <tr><td>9:30 AM</td><td>9:34 AM</td><td>9:36 AM</td><td>9:38 AM</td><td>9:43 AM</td></tr>
-                  <tr><td>10:15 AM</td><td>10:19 AM</td><td>10:21 AM</td><td>10:23 AM</td><td>10:28 AM</td></tr>
-                  <tr><td>10:45 AM</td><td>10:49 AM</td><td>10:51 AM</td><td>10:53 AM</td><td>10:58 AM</td></tr>
-                  <tr><td>11:30 AM</td><td>11:34 AM</td><td>11:36 AM</td><td>11:38 AM</td><td>11:43 AM</td></tr>
-                  <tr><td>12:00 PM</td><td>12:04 PM</td><td>12:06 PM</td><td>12:08 PM</td><td>12:13 PM</td></tr>
-                  <tr><td>12:30 PM</td><td>12:34 PM</td><td>12:36 PM</td><td>12:38 PM</td><td>12:43 PM</td></tr>
-                  <tr><td>1:00 PM</td><td>1:04 PM</td><td>1:06 PM</td><td>1:08 PM</td><td>1:13 PM</td></tr>
-                  <tr><td>1:30 PM</td><td>1:34 PM</td><td>1:36 PM</td><td>1:38 PM</td><td>1:43 PM</td></tr>
-                  <tr><td>2:15 PM</td><td>2:19 PM</td><td>2:21 PM</td><td>2:23 PM</td><td>2:28 PM</td></tr>
-                  <tr><td>2:45 PM</td><td>2:49 PM</td><td>2:51 PM</td><td>2:53 PM</td><td>2:58 PM</td></tr>
-                  <tr><td>3:30 PM</td><td>3:34 PM</td><td>3:36 PM</td><td>3:38 PM</td><td>3:43 PM</td></tr>
-                  <tr><td>4:30 PM</td><td>4:34 PM</td><td>4:36 PM</td><td>4:38 PM</td><td>4:43 PM</td></tr>
-                  <tr><td>5:30 PM</td><td>5:34 PM</td><td>5:36 PM</td><td>5:38 PM</td><td>5:43 PM</td></tr>
-                  <tr><td>6:15 PM</td><td>6:19 PM</td><td>6:21 PM</td><td>6:23 PM</td><td>6:28 PM</td></tr>
-                  <tr><td>7:00 PM</td><td>7:04 PM</td><td>7:06 PM</td><td>7:08 PM</td><td>7:13 PM</td></tr>
-                  <tr><td>8:00 PM</td><td>8:04 PM</td><td>8:06 PM</td><td>8:08 PM</td><td>8:13 PM</td></tr>
-                  <tr><td>9:00 PM</td><td>9:04 PM</td><td>9:06 PM</td><td>9:08 PM</td><td>9:13 PM</td></tr>
-                  <tr><td>10:15 PM</td><td>10:19 PM</td><td>10:21 PM</td><td>10:23 PM</td><td>10:28 PM</td></tr>
-                  <tr><td>10:30 PM <span class="sched-day-tag">Sat</span></td><td>10:34 PM</td><td>10:36 PM</td><td>10:38 PM</td><td>10:43 PM</td></tr>
-                  <tr><td>10:45 PM <span class="sched-day-tag">Sun</span></td><td>10:49 PM</td><td>10:51 PM</td><td>10:53 PM</td><td>10:58 PM</td></tr>
-                  <tr><td>11:30 PM</td><td>11:34 PM</td><td>11:36 PM</td><td>11:38 PM</td><td>11:43 PM</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="sched-note">† Sat/Sun rows indicate day-specific departures. All other trips operate both Saturday and Sunday.</p>
+            <p class="callout"><strong>No OCCT service on summer weekends.</strong> The Campus Shuttle does not operate Saturday or Sunday during summer service. For weekend transportation, please use <a href="https://www.gobroomecounty.com/transit/" target="_blank" rel="noopener noreferrer">BC Transit</a>.</p>
           </div>
-
-          <!-- Late Night panel -->
-          <div class="sched-panel" id="cs-ln">
-            <div class="sched-info">
-              <strong>Late Nite Service</strong> &mdash; Operates Friday &amp; Saturday nights during the Fall and Spring semesters only. Please read the <u><strong><a href="../news.html">News &amp; Info Page</a></strong></u>&nbsp;in the event of reduced or canceled Late Nite Service.
-            </div>
-            <div class="sched-table-wrap">
-              <table class="sched-table">
-                <thead>
-                  <tr>
-                    <th>Leaves Mohawk</th>
-                    <th>Susquehanna</th>
-                    <th>Hillside</th>
-                    <th>Mountainview</th>
-                    <th>Hinman / Academic A</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>12:30 AM</td><td>12:34 AM</td><td>12:36 AM</td><td>12:38 AM</td><td>12:43 AM</td></tr>
-                  <tr><td>12:45 AM</td><td>12:49 AM</td><td>12:51 AM</td><td>12:53 AM</td><td>12:58 AM</td></tr>
-                  <tr><td>1:55 AM</td><td>1:59 AM</td><td>2:01 AM</td><td>2:03 AM</td><td>2:08 AM</td></tr>
-                  <tr><td>2:50 AM</td><td>2:54 AM</td><td>2:56 AM</td><td>2:58 AM</td><td>3:03 AM</td></tr>
-                  <tr><td>3:30 AM</td><td>3:34 AM</td><td>3:36 AM</td><td>3:38 AM</td><td>3:43 AM</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="sched-note">Late Nite service runs Fri &amp; Sat only. Times shown are approximate.</p>
-          </div>
-
-          <p class="sched-note">* Download the master schedule PDF for full timetable details. Daytime weekday service operates as a continuous loop with no fixed times.</p>
         </div>
       </div><!-- /loop-outer -->
 
       <!-- ── INNER LOOP PANEL ── -->
       <div class="loop-panel card-body" id="loop-inner">
+        <div class="callout-warn">
+          <strong>Inner Loop is suspended for summer 2026.</strong> The Inner Loop does not operate during summer service. It returns in the fall semester. For daytime campus and parking-lot travel this summer, use the <strong><u><a href="riu.html">RIU Shuttle</a></u></strong>.
+        </div>
         <div class="sched-info">
-          The Inner Loop runs as a <strong>continuous loop</strong>, traveling around the Brain (inner campus road). Service operates <strong>Monday&ndash;Friday during the day</strong>, with no fixed timetable. No service on evenings or weekends.
+          The Inner Loop runs as a <strong>continuous loop</strong>, traveling around the Brain (inner campus road). When in service, it operates <strong>Monday&ndash;Friday during the day</strong>, with no fixed timetable.
         </div>
 
         <!-- Stops -->
@@ -524,6 +466,27 @@
   <!-- ── SIDEBAR ── -->
   <div class="sidebar">
 
+    <!-- Operating Times -->
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>Operating Times</h3>
+      </div>
+      <div class="sb-card-body">
+        <p style="font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--gray-400); margin-bottom:10px;">Summer 2026 Service</p>
+        <div class="op-times">
+          <div class="op-row">
+            <span class="op-row-label">Weekdays</span>
+            <span class="op-row-time">6:30 PM &ndash; 8:30 PM</span>
+          </div>
+          <div class="op-row">
+            <span class="op-row-label">Weekends</span>
+            <span class="op-row-time">No OCCT Service</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Passenger Notices -->
     <div class="sb-card">
       <div class="sb-card-head" style="background:#e8a000;">
@@ -532,17 +495,26 @@
       </div>
       <div class="sb-card-body" style="gap:8px; display:flex; flex-direction:column;">
         <div class="sb-notice sb-notice-warn">
-          <strong>Engineering Bldg &harr; Mohawk (Outer Loop):</strong> These are separate loops. Buses from Engineering Building do <em>not</em> stop at Mohawk, and buses from Mohawk do <em>not</em> stop at Engineering Building. Board at the correct stop.
+          <strong>Summer 2026: Evenings Only.</strong> CS operates Mon&ndash;Fri from <strong>6:30 PM to 8:30 PM</strong>. No daytime continuous-loop service, no Inner Loop, no Late Nite, and no weekend service in summer.
+        </div>
+        <div class="sb-notice sb-notice-warn">
+          <strong>Need daytime service?</strong> Use the <strong><u><a href="riu.html">RIU Shuttle</a></u></strong> for travel around campus residences, ITC, and UClub.
         </div>
         <div class="sb-notice">
-          <strong>Inner Loop &mdash; Weekdays Only:</strong> The Inner Loop runs Mon&ndash;Fri during the day only. No Inner Loop service on evenings, weekends, or holidays.
+          <strong>Engineering Bldg &harr; Mohawk (Outer Loop):</strong> These are separate loops. Buses from Engineering Building do <em>not</em> stop at Mohawk, and vice versa. Board at the correct stop.
         </div>
-        <div class="sb-notice">
-          <strong>After 9:40 PM (weekdays):</strong> The Outer Loop continuous service ends. All service switches to <strong>blue buses</strong> on scheduled, <strong>non-contiguous</strong> loops departing <strong>from Mohawk only</strong>.
-        </div>
-        <div class="sb-notice">
-          <strong>Weekends:</strong> All campus shuttles run as <strong>blue buses</strong> on scheduled, <strong>non-contiguous</strong> loops departing <strong>from Mohawk only</strong>. No Engineering Building departures and no Inner Loop service.
-        </div>
+      </div>
+    </div>
+
+    <!-- Summer Alternative Routes -->
+    <div class="sb-card" style="border:2px solid #AEE1AE;">
+      <div class="sb-card-head" style="background:#AEE1AE;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="#000" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        <h3 style="color:#0C2340;">Summer Daytime Alternative</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>The Campus Shuttle does not run daytime in summer. Use the <strong>RIU Shuttle</strong> &mdash; it serves residential communities, ITC, UClub, Meadows, and Hayes on a continuous loop, weekdays 8:00 AM&ndash;6:00 PM.</p>
+        <a href="riu.html" class="btn-sb" style="background:#AEE1AE;color:#0C2340;border-color:#7fc97f;">View RIU Shuttle</a>
       </div>
     </div>
 
@@ -553,8 +525,8 @@
         <h3>Download Schedule</h3>
       </div>
       <div class="sb-card-body">
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Master Schedule</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Interim Schedule</a>
       </div>
     </div>
 

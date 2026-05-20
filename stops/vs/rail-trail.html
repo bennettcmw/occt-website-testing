@@ -5,11 +5,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
-<link rel="stylesheet" href="../css/shared.css">
-<style>:root { --route-color: #708090; }</style>
+<link rel="stylesheet" href="../../css/shared.css">
+<style>:root { --route-color: #E37383; }</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>State & Court (OB) &mdash; DS Stop &mdash; OCC Transport</title>
-<link rel="icon" type="image/png" href="../img/OCCTransportLogo(1) (1).png">
+<title>Rail Trail &mdash; VS Stop &mdash; OCC Transport</title>
+<link rel="icon" type="image/png" href="../../img/OCCTransportLogo(1) (1).png">
 <style>
 .stop-photo-wrap { width: 100%; aspect-ratio: 16/9; background: var(--gray-100); border-radius: var(--radius-sm); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--gray-200); }
 .stop-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--gray-400); width: 100%; height: 100%; padding: 24px; text-align: center; }
@@ -49,17 +49,17 @@
 
 <nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a class="nav-logo" href="../index.html">
+    <a class="nav-logo" href="../../index.html">
       <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
     </a>
     <ul class="nav-links">
-      <li><a href="../routeschedule.html" class="active">Routes &amp; Schedules</a></li>
-      <li><a href="../employment.html">Employment</a></li>
-      <li><a href="../passtips.html">Passenger Tips</a></li>
-      <li><a href="../services.html">Additional Services</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a href="../news.html">News</a></li>
-      <li><a href="../contactus.html" class="nav-cta">Contact Us</a></li>
+      <li><a href="../../routeschedule.html" class="active">Routes &amp; Schedules</a></li>
+      <li><a href="../../employment.html">Employment</a></li>
+      <li><a href="../../passtips.html">Passenger Tips</a></li>
+      <li><a href="../../services.html">Additional Services</a></li>
+      <li><a href="../../about.html">About</a></li>
+      <li><a href="../../news.html">News</a></li>
+      <li><a href="../../contactus.html" class="nav-cta">Contact Us</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMobile" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
@@ -68,13 +68,13 @@
 </nav>
 
 <div class="nav-mobile" id="navMobile" aria-hidden="true">
-  <a href="../routeschedule.html">Routes &amp; Schedules</a>
-  <a href="../employment.html">Employment</a>
-  <a href="../passtips.html">Passenger Tips</a>
-  <a href="../services.html">Additional Services</a>
-  <a href="../about.html">About</a>
-  <a href="../news.html">News</a>
-  <a href="../contactus.html" class="mob-cta">Contact Us</a>
+  <a href="../../routeschedule.html">Routes &amp; Schedules</a>
+  <a href="../../employment.html">Employment</a>
+  <a href="../../passtips.html">Passenger Tips</a>
+  <a href="../../services.html">Additional Services</a>
+  <a href="../../about.html">About</a>
+  <a href="../../news.html">News</a>
+  <a href="../../contactus.html" class="mob-cta">Contact Us</a>
 </div>
 
 <div class="alert-bar" role="region" aria-label="Service alert"></div>
@@ -82,19 +82,19 @@
 <div class="page-header" role="region" aria-label="Page header">
   <div class="page-header-inner">
     <div class="breadcrumb">
-      <a href="../index.html">Home</a>
+      <a href="../../index.html">Home</a>
       <span>&rsaquo;</span>
-      <a href="../routeschedule.html">Routes &amp; Schedules</a>
+      <a href="../../routeschedule.html">Routes &amp; Schedules</a>
       <span>&rsaquo;</span>
-      <a href="../routes/ds.html">DS &mdash; Downtown Southside Shuttle</a>
+      <a href="../../routes/vs.html">VS &mdash; Vestal Shopping Shuttle</a>
       <span>&rsaquo;</span>
       Stops
     </div>
     <div class="page-header-title">
-      <span class="route-badge-lg" style="color:#fff">DS</span>
+      <span class="route-badge-lg" style="color:#fff">VS</span>
       <div>
-        <h1>State & Court</h1>
-        <p>Outbound stop &mdash; Downtown Southside Shuttle &bull; <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:rgba(255,255,255,0.22);color:#fff;padding:2px 9px;border-radius:4px;">Outbound</span></p>
+        <h1>Rail Trail</h1>
+        <p>Vestal Shopping Shuttle stop</p>
       </div>
     </div>
   </div>
@@ -114,12 +114,7 @@
       </div>
       <div class="card-body">
         <div class="stop-photo-wrap">
-          <div class="stop-photo-placeholder">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
-            </svg>
-            <p>Stop photo coming soon</p>
-          </div>
+          <img src="https://occtransport.s3.us-east-1.amazonaws.com/Stops/Rail%20Trail.jpg" alt="Stop photo" style="width:100%;height:100%;object-fit:cover;">
         </div>
       </div>
     </div>
@@ -149,10 +144,9 @@
       </div>
       <div class="card-body">
         <div class="routes-list">
-          <a href="../routes/ds.html" class="route-chip">
-            <span class="route-chip-badge" style="background:#708090;color:#fff">DS</span>
-            <span class="route-chip-name">Downtown Southside Shuttle</span>
-            <span class="route-chip-dir">Outbound &rsaquo;</span>
+          <a href="../../routes/vs.html" class="route-chip">
+            <span class="route-chip-badge" style="background:#E37383;color:#fff">VS</span>
+            <span class="route-chip-name">Vestal Shopping Shuttle</span>
           </a>
         </div>
       </div>
@@ -185,8 +179,8 @@
         <h3>Full Route</h3>
       </div>
       <div class="sb-card-body">
-        <p>View the complete DS Downtown Southside Shuttle route, schedule, and all stops.</p>
-        <a href="../routes/ds.html" class="btn-sb">DS &mdash; Downtown Southside Shuttle</a>
+        <p>View the complete VS Vestal Shopping Shuttle route, schedule, and all stops.</p>
+        <a href="../../routes/vs.html" class="btn-sb">VS &mdash; Vestal Shopping Shuttle</a>
       </div>
     </div>
 
@@ -196,8 +190,8 @@
         <h3>Download Schedule</h3>
       </div>
       <div class="sb-card-body">
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
-        <a href="#" class="btn-sb" target="_blank" rel="noopener noreferrer">Schedule Placeholder</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Master Schedule</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Interim Schedule</a>
       </div>
     </div>
 
@@ -208,7 +202,7 @@
       </div>
       <div class="sb-card-body">
         <p>Check News &amp; Info for the latest service changes, delays, and early closures.</p>
-        <a href="../news.html" class="btn-sb">News &amp; Info</a>
+        <a href="../../news.html" class="btn-sb">News &amp; Info</a>
       </div>
     </div>
 
@@ -219,7 +213,7 @@
       </div>
       <div class="sb-card-body">
         <p>Can&rsquo;t find what you&rsquo;re looking for? Our team is happy to help.</p>
-        <a href="../contactus.html" class="btn-sb">Contact Us</a>
+        <a href="../../contactus.html" class="btn-sb">Contact Us</a>
       </div>
     </div>
 
@@ -233,13 +227,13 @@
       <p>Serving the Binghamton University community since 1971.</p>
     </div>
     <div class="footer-links">
-      <a href="../routeschedule.html">Routes &amp; Schedules</a>
-      <a href="../employment.html">Employment</a>
-      <a href="../passtips.html">Passenger Tips</a>
-      <a href="../services.html">Additional Services</a>
-      <a href="../about.html">About</a>
-      <a href="../news.html">News</a>
-      <a href="../contactus.html">Contact Us</a>
+      <a href="../../routeschedule.html">Routes &amp; Schedules</a>
+      <a href="../../employment.html">Employment</a>
+      <a href="../../passtips.html">Passenger Tips</a>
+      <a href="../../services.html">Additional Services</a>
+      <a href="../../about.html">About</a>
+      <a href="../../news.html">News</a>
+      <a href="../../contactus.html">Contact Us</a>
     </div>
     <div class="footer-social">
       <a href="https://www.facebook.com/occtransport/" class="soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/Facebook+Logo.png" alt="Facebook"></a>
@@ -254,8 +248,7 @@
   </div>
 </footer>
 
-
-<script src="../js/shared.js"></script>
-<script src="../js/alerts.js"></script>
+<script src="../../js/shared.js"></script>
+<script src="../../js/alerts.js"></script>
 </body>
 </html>
