@@ -136,7 +136,7 @@ html { scroll-behavior: smooth; }
 
 /* RESPONSIVE */
 @media (max-width: 960px) {
-  .hero-inner { flex-direction: column; align-items: center; text-align: center; }
+  .hero-inner { flex-direction: column; align-items: center; text-align: center; width: 100%; }
   .hero-text { flex: none; width: 100%; max-width: 520px; }
   .hero-btns { justify-content: center; }
   .routes-panel { display: none; }
@@ -154,6 +154,18 @@ html { scroll-behavior: smooth; }
   .hero       { padding: 40px 20px 36px; }
   .main       { padding: 24px 18px 64px; }
 }
+
+/* MOBILE HERO BOARDS ROW */
+.hero-mob-boards { display: none; }
+@media (max-width: 960px) {
+  .hero-mob-boards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; max-width: 520px; margin-top: 12px; padding: 0 6px; }
+}
+.hero-mob-board { display: flex; flex-direction: column; align-items: center; gap: 5px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; padding: 10px 6px 8px; text-decoration: none; transition: background .12s; text-align: center; }
+.hero-mob-board:hover { background: rgba(255,255,255,0.18); }
+.hero-mob-board-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-bright); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hero-mob-board-icon svg { width: 18px; height: 18px; color: #fff; }
+.hero-mob-board-name { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; }
+.hero-mob-board-sub { font-size: 10px; color: rgba(255,255,255,0.55); line-height: 1.3; }
 
 .routes-panel-label { font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,0.72); }
 
@@ -206,7 +218,7 @@ html { scroll-behavior: smooth; }
 </div>
 
 <!-- ============================================================
-     NOTICE BAR — update this on every page that uses it using the Find and Replace tool in VS Code
+     NOTICE BAR — update this using "alerts.js"
      ============================================================ -->
 
 
@@ -265,11 +277,31 @@ html { scroll-behavior: smooth; }
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c-.317-.159.69-.159 1.006 0l4.994 2.497z"/></svg>
           Routes &amp; Schedules
         </a>
-        <a href="https://binghamtonupublic.etaspot.net/" target="_blank" class="btn btn-ghost" onclick="(function(e){var ua=navigator.userAgent;if(/android/i.test(ua)){e.preventDefault();window.open('https://play.google.com/store/apps/details?id=com.etatransit','_blank');}else if(/iphone|ipad/i.test(ua)){e.preventDefault();window.open('https://apps.apple.com/us/app/eta-spot/id1021211544','_blank');}})(event)" rel="noopener noreferrer">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-          Track Live (ETA SPOT)
-        </a>
       </div>
+    </div>
+
+    <!-- HERO QUICK BOARDS (mobile only) -->
+    <div class="hero-mob-boards" role="navigation" aria-label="Quick access">
+      <a href="https://binghamtonupublic.etaspot.net/" target="_blank" class="hero-mob-board" aria-label="Track live bus locations with ETA Spot, opens in a new tab" onclick="(function(e){var ua=navigator.userAgent;if(/android/i.test(ua)){e.preventDefault();window.open('https://play.google.com/store/apps/details?id=com.etatransit','_blank');}else if(/iphone|ipad/i.test(ua)){e.preventDefault();window.open('https://apps.apple.com/us/app/eta-spot/id1021211544','_blank');}})(event)" rel="noopener noreferrer">
+        <div class="hero-mob-board-icon"><svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
+        <div class="hero-mob-board-name" aria-hidden="true">ETA Spot</div>
+        <div class="hero-mob-board-sub" aria-hidden="true">Live tracking</div>
+      </a>
+      <a href="union-departures.html" class="hero-mob-board" aria-label="University Union departure board">
+        <div class="hero-mob-board-icon"><svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg></div>
+        <div class="hero-mob-board-name" aria-hidden="true">Union</div>
+        <div class="hero-mob-board-sub" aria-hidden="true">Departures</div>
+      </a>
+      <a href="udc-departures.html" class="hero-mob-board" aria-label="Downtown Center departure board">
+        <div class="hero-mob-board-icon"><svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg></div>
+        <div class="hero-mob-board-name" aria-hidden="true">Downtown</div>
+        <div class="hero-mob-board-sub" aria-hidden="true">Departures</div>
+      </a>
+      <a href="hsc-departures.html" class="hero-mob-board" aria-label="Health Sciences departure board">
+        <div class="hero-mob-board-icon"><svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg></div>
+        <div class="hero-mob-board-name" aria-hidden="true">Health Sci</div>
+        <div class="hero-mob-board-sub" aria-hidden="true">Departures</div>
+      </a>
     </div>
 
     <!-- ROUTES PANEL -->
