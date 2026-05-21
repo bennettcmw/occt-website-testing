@@ -122,3 +122,6 @@ footer { color: rgba(255,255,255,0.80) !important; }
 .breadcrumb a { color: rgba(255,255,255,0.80) !important; }
 .route-chip-desc { color: rgba(255,255,255,0.80) !important; }
 .routes-panel-foot a { color: #7cc5f5 !important; }
+a[href*="gobroomecounty.com/transit"],
+a[href*="ridebctransit.com"],
+a[href*="broomecountyny.gov/transit"] { text-decoration: underline; }
