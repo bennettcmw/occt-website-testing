@@ -1,4 +1,30 @@
 /* ── Mobile nav ── */
+document.addEventListener('DOMContentLoaded', function () {
+  const mob = document.getElementById('navMobile');
+  if (!mob) return;
+
+  // Build header with logo + close button
+  const existingLogo = document.querySelector('nav .nav-logo');
+  const logoHref = existingLogo ? existingLogo.getAttribute('href') : '#';
+  const logoSrc = existingLogo ? existingLogo.querySelector('img').src : '';
+
+  const header = document.createElement('div');
+  header.className = 'nav-mob-header';
+  header.innerHTML =
+    '<a href="' + logoHref + '" class="nav-mob-logo"><img src="' + logoSrc + '" alt="OCC Transport"></a>' +
+    '<button class="nav-mob-close" onclick="toggleMobileNav()" aria-label="Close navigation menu">' +
+    '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>' +
+    '</button>';
+
+  // Wrap existing links in a scrollable container
+  const linksWrap = document.createElement('div');
+  linksWrap.className = 'nav-mob-links';
+  while (mob.firstChild) linksWrap.appendChild(mob.firstChild);
+
+  mob.appendChild(header);
+  mob.appendChild(linksWrap);
+});
+
 function toggleMobileNav() {
   const ham = document.getElementById('navHamburger');
   const mob = document.getElementById('navMobile');
